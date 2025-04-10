@@ -57,12 +57,15 @@ Create a synthesized dataset that combines original data with extrapolated data 
    - For each project, extract category and labels from that CSV file
    - In all other files, override the project's category and labels there if it exists, else add it as new row 
 
-4. **Extrapolation Phase**
-   - Create a date sequence for the extrapolation region based on the specified timestep unit
+4. **Extrapolation Phase Preparation**
+   - Create a date sequence for the extrapolation region [x,y] with date intervals based on the specified timestep unit
+     - The first date, x, is the earliest project creation date, the last date must be smaller than the first CSV file date, y
    - For each date in the extrapolation sequence:
-     - Create a new CSV file with the a stripped down structure of the original files
+     - Create a new CSV file with a stripped down structure of the original files
      - Columns: `name`, `homepage`, `y_property`, `category`, `labels`
-     - Rows: Fill with unique project keys (name, homepage), other fields empty
+     - Rows: Fill with unique project keys (name, homepage),
+       - Fill project's category and label from the project-(category, labels) collection from the "previous step"
+
 
 5. **Synthesis Phase**
    - Combine the original and extrapolated CSV files
@@ -79,14 +82,14 @@ Create a synthesized dataset that combines original data with extrapolated data 
 - [x] Implement collection of unique project keys and creation dates
 - [x] Create temporary workspace with selected CSV files
 - [x] Clean up original data in selected CSV files
-- [ ] Implement date sequence generation for extrapolation region
-- [ ] Implement extrapolation of project data
+- [x] Implement date sequence generation for extrapolation region
+- [x] Implement extrapolation of project data
 - [ ] Implement synthesis of original and extrapolated data
 - [ ] Add visual indicator for extrapolation boundary
-- [ ] Add comprehensive error handling and warnings
-- [ ] Create example usage script
+- [x] Add comprehensive error handling and warnings
+- [x] Create example usage script
 - [ ] Add documentation
-- [ ] Test example usage script
+- [x] Test example usage script
 
 ## Current Progress
 
@@ -95,9 +98,9 @@ Create a synthesized dataset that combines original data with extrapolated data 
 - [x] Implementation of collection phase
 - [x] Implementation of workspace preparation
 - [x] Implementation of data cleanup phase
-- [ ] Implementation of extrapolation phase
+- [x] Implementation of extrapolation phase
 - [ ] Implementation of synthesis phase
-- [ ] Testing and validation
+- [x] Testing and validation of extrapolation phase
 
 ## Notes and Considerations
 

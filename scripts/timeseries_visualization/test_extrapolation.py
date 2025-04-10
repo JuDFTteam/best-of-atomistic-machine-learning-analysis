@@ -17,7 +17,8 @@ sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(
 
 from analysis.timeseries_extrapolation import (
     test_collect_project_keys_and_dates,
-    test_create_extrapolation_directory
+    test_create_extrapolation_directory,
+    test_prepare_extrapolation_files
 )
 
 
@@ -103,5 +104,28 @@ if __name__ == "__main__":
     
     # Test if the clean up process has made category and labels consistent
     test_clean_up_consistency(extrapolation_dir)
+    
+    # Test preparing extrapolation files
+    print("\nTesting preparation of extrapolation files...")
+    extrapolation_files = test_prepare_extrapolation_files(
+        time_step=10,
+        y_property='projectrank',
+        extrapolate_timesteps=1,
+        extrapolate_timesteps_unit='year'
+    )
+    
+    # Check the first and last extrapolation files
+    if extrapolation_files:
+        print("\nChecking contents of first extrapolation file:")
+        first_file = extrapolation_files[0]
+        try:
+            df = pd.read_csv(first_file)
+            print(f"File: {os.path.basename(first_file)}")
+            print(f"Filepath: {first_file}")
+            print(f"Number of projects: {len(df)}")
+            print(f"Columns: {', '.join(df.columns)}")
+            print(f"First few rows:\n{df.head(3)}")
+        except Exception as e:
+            print(f"Error reading file {first_file}: {str(e)}")
     
     print("\nTest completed successfully!")

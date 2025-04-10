@@ -7,10 +7,10 @@ creating a synthesized dataset that can be used with the timeseries_visualizatio
 
 import os
 import re
-import logging
 import shutil
+import logging
 from datetime import datetime, timedelta
-from typing import Dict, List, Optional, Union, Tuple, Set
+from typing import List, Optional, Tuple, Set
 
 import pandas as pd
 from tqdm import tqdm
@@ -179,6 +179,217 @@ class TimeSeriesExtrapolator:
         
         return project_first_appearance
     
+    def prepare_extrapolation_files(
+        self,
+        y_property: str = 'projectrank',
+        extrapolate_timesteps: int = 1,
+        extrapolate_timesteps_unit: str = 'year'
+    ) -> List[str]:
+        """
+        Prepare extrapolation files for the extrapolation region.
+        
+        This method creates a date sequence for the extrapolation region [x,y] and
+        generates new CSV files with the appropriate structure for each date in the sequence.
+        
+        Args:
+            y_property: Dynamic property to extrapolate
+            extrapolate_timesteps: Number of timesteps to use for extrapolation
+            extrapolate_timesteps_unit: Unit for extrapolation timesteps ('day', 'month', 'year')
+            
+        Returns:
+            List of paths to the generated extrapolation files
+        """
+        self.logger.info("Preparing extrapolation files")
+        
+        if not self.extrapolation_dir or not os.path.exists(self.extrapolation_dir):
+            self.logger.error("Extrapolation directory does not exist. Create it first with create_extrapolation_directory()")
+            return []
+        
+        if not self.project_first_appearance:
+            self.logger.error("Project first appearance info not available. Run clean_up_original_data() first")
+            return []
+        
+        if not hasattr(self, 'project_creation_dates') or not self.project_creation_dates:
+            self.logger.warning("Project creation dates not available. Collecting them now...")
+            # Collect project creation dates from all CSV files
+            self.project_creation_dates = {}
+            for file_path in self.csv_files:
+                df = self._parse_csv_file(file_path)
+                if df.empty or 'created_at' not in df.columns:
+                    continue
+                    
+                for _, row in df.iterrows():
+                    name = row.get('name', '')
+                    homepage = row.get('homepage', '')
+                    created_at = row.get('created_at', None)
+                    
+                    if pd.isna(name) or name == '' or pd.isna(created_at) or created_at == '':
+                        continue
+                        
+                    project_key = (name, homepage if not pd.isna(homepage) else '')
+                    
+                    # Parse the creation date
+                    try:
+                        if isinstance(created_at, str):
+                            created_date = datetime.fromisoformat(created_at.replace('Z', '+00:00'))
+                        else:
+                            created_date = created_at
+                            
+                        self.project_creation_dates[project_key] = created_date
+                    except (ValueError, TypeError) as e:
+                        self.logger.warning(f"Could not parse creation date '{created_at}' for project {name}: {e}")
+        
+        # Create a date sequence for the extrapolation region
+        extrapolation_date_sequence = self._create_extrapolation_date_sequence(
+            extrapolate_timesteps=extrapolate_timesteps,
+            extrapolate_timesteps_unit=extrapolate_timesteps_unit
+        )
+        
+        if not extrapolation_date_sequence:
+            self.logger.warning("No extrapolation dates generated")
+            return []
+            
+        self.logger.info(f"First extrapolation date: {extrapolation_date_sequence[0]}")
+        self.logger.info(f"Last extrapolation date: {extrapolation_date_sequence[-1]}")
+        self.logger.info(f"Number of extrapolation dates: {len(extrapolation_date_sequence)}")
+        
+        # Generate extrapolation files
+        extrapolation_files = []
+        for date in tqdm(extrapolation_date_sequence, desc="Generating extrapolation files"):
+            file_path = self._create_extrapolation_file(date, y_property)
+            if file_path:
+                extrapolation_files.append(file_path)
+                
+        # Sort the extrapolation files by date
+        extrapolation_files.sort(key=lambda x: datetime.strptime(os.path.basename(x).split('_')[0], '%Y-%m-%d'))
+        
+        self.logger.info(f"Generated {len(extrapolation_files)} extrapolation files")
+        return extrapolation_files
+    
+    def _create_extrapolation_date_sequence(
+        self,
+        extrapolate_timesteps: int = 1,
+        extrapolate_timesteps_unit: str = 'year'
+    ) -> List[datetime]:
+        """
+        Create a date sequence for the extrapolation region.
+        
+        Args:
+            extrapolate_timesteps: Number of timesteps to use for extrapolation
+            extrapolate_timesteps_unit: Unit for extrapolation timesteps
+            
+        Returns:
+            List of dates in the extrapolation sequence
+        """
+        if not self.earliest_creation_date or not self.earliest_csv_date:
+            self.logger.error("Earliest creation date or earliest CSV date not available. Run collect_project_keys_and_dates() first")
+            return []
+        
+        # Create a date sequence for the extrapolation region [x,y]
+        extrapolation_date_sequence = []
+        current_date = self.earliest_creation_date
+        
+        while current_date <= self.earliest_csv_date:
+            extrapolation_date_sequence.append(current_date)
+            
+            # Increment current_date based on extrapolate_timesteps_unit
+            if extrapolate_timesteps_unit == 'day':
+                current_date += timedelta(days=extrapolate_timesteps)
+            elif extrapolate_timesteps_unit == 'month':
+                # Add months by calculating new year and month
+                year = current_date.year
+                month = current_date.month + extrapolate_timesteps
+                
+                # Adjust year if month > 12
+                year += (month - 1) // 12
+                month = ((month - 1) % 12) + 1
+                
+                # Create new date with same day (or last day of month if original day doesn't exist)
+                day = min(current_date.day, self._last_day_of_month(year, month))
+                current_date = datetime(year, month, day)
+            elif extrapolate_timesteps_unit == 'year':
+                # Add years
+                new_year = current_date.year + extrapolate_timesteps
+                
+                # Handle leap years for February 29
+                if current_date.month == 2 and current_date.day == 29:
+                    if self._is_leap_year(new_year):
+                        current_date = datetime(new_year, 2, 29)
+                    else:
+                        current_date = datetime(new_year, 2, 28)
+                else:
+                    current_date = datetime(new_year, current_date.month, current_date.day)
+            else:
+                self.logger.error(f"Invalid extrapolate_timesteps_unit: {extrapolate_timesteps_unit}")
+                return []
+        
+        return extrapolation_date_sequence
+    
+    def _create_extrapolation_file(self, date: datetime, y_property: str) -> Optional[str]:
+        """
+        Create a new CSV file for a given date.
+        
+        Args:
+            date: Date to create the file for
+            y_property: Dynamic property to extrapolate
+            
+        Returns:
+            Path to the created file or None if file could not be created
+        """
+        try:
+            # Format date as YYYY-MM-DD
+            date_str = date.strftime('%Y-%m-%d')
+            file_name = f"{date_str}_projects.csv"
+            
+            # Make sure we're saving to the extrapolation directory
+            file_path = os.path.join(self.extrapolation_dir, file_name)
+            
+            # Create rows for the CSV file
+            rows = []
+            for project_key, (first_date, category, labels) in self.project_first_appearance.items():
+                if project_key in self.project_creation_dates:
+                    created_date = self.project_creation_dates[project_key]
+                    
+                    # Only include projects created before or on this date
+                    if created_date <= date:
+                        rows.append({
+                            'name': project_key[0],
+                            'homepage': project_key[1],
+                            y_property: 0,  # Initialize with 0 for extrapolation
+                            'category': category,
+                            'labels': labels
+                        })
+            
+            # Create DataFrame from rows and save to CSV
+            if rows:
+                df = pd.DataFrame(rows)
+                df.to_csv(file_path, index=False)
+                self.logger.info(f"Created extrapolation file {file_name} with {len(rows)} projects")
+                return file_path
+            else:
+                self.logger.warning(f"No projects to include in {file_path}, skipping")
+                return None
+                
+        except Exception as e:
+            self.logger.error(f"Error creating extrapolation file {file_path}: {str(e)}")
+            return None
+    
+    def _extract_date_from_filename(self, filename: str) -> Optional[datetime]:
+        """
+        Extract date from filename in format YYYY-MM-DD_projects.csv
+        
+        Args:
+            filename: Filename to extract date from
+            
+        Returns:
+            Datetime object or None if date could not be extracted
+        """
+        try:
+            date_str = filename.split('_')[0]
+            return datetime.strptime(date_str, '%Y-%m-%d')
+        except (ValueError, IndexError):
+            return None
+    
     def _find_csv_files(self, time_step: int = 1) -> Tuple[List[str], List[datetime]]:
         """
         Find all CSV files in the history directory matching the pattern YYYY-MM-DD_projects.csv.
@@ -294,9 +505,10 @@ class TimeSeriesExtrapolator:
         
         logger.info(f"Processing {len(self.csv_files)} CSV files to collect project keys and dates")
         
-        # Initialize sets
+        # Initialize sets and dictionaries
         self.unique_project_keys = set()
         self.created_dates = set()
+        self.project_creation_dates = {}
         
         # Process each file
         for file_path in tqdm(self.csv_files, desc="Collecting project keys and dates"):
@@ -329,8 +541,10 @@ class TimeSeriesExtrapolator:
                 if pd.isna(homepage):
                     homepage = ''
                 
+                project_key = (name, homepage)
+                
                 # Add to set of unique project keys
-                self.unique_project_keys.add((name, homepage))
+                self.unique_project_keys.add(project_key)
                 
                 # Collect creation date if available
                 created_at = row.get('created_at', None)
@@ -343,6 +557,9 @@ class TimeSeriesExtrapolator:
                             created_date = created_at
                         
                         self.created_dates.add(created_date)
+                        
+                        # Store creation date for this project
+                        self.project_creation_dates[project_key] = created_date
                     except (ValueError, TypeError) as e:
                         logger.warning(f"Could not parse creation date '{created_at}' for project {name}: {e}")
         
@@ -430,6 +647,63 @@ def test_collect_project_keys_and_dates(history_dir: Optional[str] = None, time_
     return unique_project_keys, earliest_creation_date
 
 
+def test_prepare_extrapolation_files(
+    history_dir: Optional[str] = None, 
+    time_step: int = 1,
+    y_property: str = 'projectrank',
+    extrapolate_timesteps: int = 1,
+    extrapolate_timesteps_unit: str = 'year'
+):
+    """
+    Test function to prepare extrapolation files.
+    
+    Args:
+        history_dir: Path to the directory containing historical CSV files
+        time_step: Sampling frequency for CSV files
+        y_property: Dynamic property to extrapolate
+        extrapolate_timesteps: Number of timesteps to use for extrapolation
+        extrapolate_timesteps_unit: Unit for extrapolation timesteps
+    
+    Returns:
+        List of paths to the generated extrapolation files
+    """
+    # Create a TimeSeriesExtrapolator instance
+    extrapolator = TimeSeriesExtrapolator(history_dir)
+    
+    # Collect project keys and creation dates
+    unique_project_keys, earliest_creation_date = extrapolator.collect_project_keys_and_dates(time_step)
+    
+    # Create extrapolation directory and copy selected CSV files
+    extrapolation_dir = os.path.join(extrapolator.history_dir, "extrapolation_data")
+    if os.path.exists(extrapolation_dir):
+        shutil.rmtree(extrapolation_dir)
+    os.makedirs(extrapolation_dir, exist_ok=True)
+    
+    # Copy selected CSV files to the extrapolation directory
+    for file_path in extrapolator.csv_files:
+        shutil.copy2(file_path, extrapolation_dir)
+    
+    # Clean up original data
+    extrapolator.clean_up_original_data()
+    
+    # Prepare extrapolation files
+    extrapolation_files = extrapolator.prepare_extrapolation_files(
+        y_property=y_property,
+        extrapolate_timesteps=extrapolate_timesteps,
+        extrapolate_timesteps_unit=extrapolate_timesteps_unit
+    )
+    
+    print(f"\nGenerated {len(extrapolation_files)} extrapolation files")
+    if extrapolation_files:
+        # Sort the extrapolation files by date
+        sorted_files = sorted(extrapolation_files, 
+                              key=lambda x: datetime.strptime(os.path.basename(x).split('_')[0], '%Y-%m-%d'))
+        print(f"First extrapolation file: {os.path.basename(sorted_files[0])}")
+        print(f"Last extrapolation file: {os.path.basename(sorted_files[-1])}")
+    
+    return extrapolation_files
+
+
 def test_create_extrapolation_directory(history_dir: Optional[str] = None, time_step: int = 1):
     """
     Test function to create the extrapolation directory and copy selected CSV files.
@@ -464,7 +738,15 @@ def test_create_extrapolation_directory(history_dir: Optional[str] = None, time_
 if __name__ == "__main__":
     # Run the test functions
     print("Testing collection of project keys and creation dates...")
-    test_collect_project_keys_and_dates(time_step=10)
+    unique_project_keys, earliest_creation_date = test_collect_project_keys_and_dates(time_step=10)
     
     print("\nTesting creation of extrapolation directory...")
-    test_create_extrapolation_directory(time_step=10)
+    extrapolation_dir, date_sequence = test_create_extrapolation_directory(time_step=10)
+    
+    print("\nTesting preparation of extrapolation files...")
+    extrapolation_files = test_prepare_extrapolation_files(
+        time_step=10,
+        y_property='projectrank',
+        extrapolate_timesteps=1,
+        extrapolate_timesteps_unit='year'
+    )
