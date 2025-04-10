@@ -233,6 +233,14 @@ class TimeSeriesVisualizer:
                 else:
                     logger.warning(f"Unexpected labels format for project {row.get('name', 'unknown')}: {type(row['labels'])}")
                     continue
+                
+                # Add category as an additional label if it exists
+                if 'category' in row and not pd.isna(row['category']) and row['category'] != '':
+                    if isinstance(row['category'], str):
+                        # Add category to project labels if it's not already there
+                        category = row['category'].strip()
+                        if category and category not in project_labels:
+                            project_labels.append(category)
             except Exception as e:
                 logger.warning(f"Error parsing labels for project {row.get('name', 'unknown')}: {e}")
                 continue
@@ -267,6 +275,14 @@ class TimeSeriesVisualizer:
                         project_labels = row['labels']
                     else:
                         continue
+                    
+                    # Add category as an additional label if it exists
+                    if 'category' in row and not pd.isna(row['category']) and row['category'] != '':
+                        if isinstance(row['category'], str):
+                            # Add category to project labels if it's not already there
+                            category = row['category'].strip()
+                            if category and category not in project_labels:
+                                project_labels.append(category)
                 except Exception:
                     continue
                 

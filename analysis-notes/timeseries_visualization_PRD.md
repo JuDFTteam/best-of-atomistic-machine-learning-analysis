@@ -75,7 +75,7 @@ Create a stacked area chart or streamchart that shows the evolution of project m
 - [x] Create example usage script
 - [x] Add documentation
 - [x] Test example usage script
-- [ ] Add parsing of category column and add it to labels
+- [x] Add parsing of category column and add it to labels
 
 ## Current Progress
 
