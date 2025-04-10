@@ -177,7 +177,8 @@ class TimeSeriesVisualizer:
         df: pd.DataFrame, 
         y_property: str,
         labels_map: Dict[str, Union[List[str], None]],
-        aggregation_method: str = 'sum'
+        aggregation_method: str = 'sum',
+        interpolate_resource: bool = False
     ) -> Dict[str, float]:
         """
         Aggregate property values by label.
@@ -187,6 +188,11 @@ class TimeSeriesVisualizer:
             y_property: Property to aggregate (e.g., 'projectrank')
             labels_map: Dictionary mapping aggregated labels to lists of true labels
             aggregation_method: Method to aggregate values ('sum', 'mean', 'median')
+            interpolate_missing: Whether to include and interpolate projects with missing properties.
+                                 For resource-True projects (websites without code repositories), this will
+                                 assign them the average value of non-resource projects in the same label.
+                                 For projectrank, resource projects have a value of 0, not missing.
+                                 For other properties, resource projects may have missing values.
             
         Returns:
             Dictionary mapping labels to aggregated values
@@ -209,8 +215,100 @@ class TimeSeriesVisualizer:
         if missing_property_count > 0:
             logger.warning(f"Found {missing_property_count} projects with missing {y_property}")
         
-        # Filter out rows with missing property
-        df = df.dropna(subset=[y_property])
+        # Handle missing properties based on interpolate_missing parameter
+        if not interpolate_resource:
+            # Filter out rows with missing property
+            df = df.dropna(subset=[y_property])
+        else:
+            # For resource-True projects, interpolate their values
+            # First, identify resource-True projects
+            resource_column = df.get('resource', pd.Series(False, index=df.index))
+            filled_resource = resource_column.fillna(False)
+            resource_projects = df[filled_resource].copy()
+            non_resource_projects = df[~filled_resource].copy()
+            
+            # Skip interpolation if no resource projects or if all projects are resource projects
+            if not resource_projects.empty and not non_resource_projects.empty:
+                # For each label in labels_map, calculate average value from non-resource projects
+                label_averages = {}
+                
+                for agg_label, true_labels in labels_map.items():
+                    # Get the true labels to match
+                    match_labels = [agg_label] if true_labels is None else true_labels
+                    
+                    # Find non-resource projects with these labels and non-missing property values
+                    label_projects = []
+                    for _, row in non_resource_projects.iterrows():
+                        if pd.isna(row['labels']) or row['labels'] == '' or pd.isna(row[y_property]):
+                            continue
+                        
+                        # Parse project labels
+                        try:
+                            if isinstance(row['labels'], str):
+                                if row['labels'].startswith('[') and row['labels'].endswith(']'):
+                                    project_labels = eval(row['labels'])
+                                else:
+                                    project_labels = [label.strip() for label in row['labels'].split(',')]
+                            elif isinstance(row['labels'], list):
+                                project_labels = row['labels']
+                            else:
+                                continue
+                                
+                            # Add category as label if it exists
+                            if 'category' in row and not pd.isna(row['category']) and row['category'] != '':
+                                if isinstance(row['category'], str):
+                                    category = row['category'].strip()
+                                    if category and category not in project_labels:
+                                        project_labels.append(category)
+                        except Exception:
+                            continue
+                        
+                        # Check if project has any of the match labels
+                        if any(label in project_labels for label in match_labels):
+                            label_projects.append(row[y_property])
+                    
+                    # Calculate average if we have projects
+                    if label_projects:
+                        label_averages[agg_label] = sum(label_projects) / len(label_projects)
+                
+                # Apply average values to resource-True projects
+                for idx, row in resource_projects.iterrows():
+                    if pd.isna(row['labels']) or row['labels'] == '':
+                        continue
+                    
+                    # Parse project labels
+                    try:
+                        if isinstance(row['labels'], str):
+                            if row['labels'].startswith('[') and row['labels'].endswith(']'):
+                                project_labels = eval(row['labels'])
+                            else:
+                                project_labels = [label.strip() for label in row['labels'].split(',')]
+                        elif isinstance(row['labels'], list):
+                            project_labels = row['labels']
+                        else:
+                            continue
+                            
+                        # Add category as label if it exists
+                        if 'category' in row and not pd.isna(row['category']) and row['category'] != '':
+                            if isinstance(row['category'], str):
+                                category = row['category'].strip()
+                                if category and category not in project_labels:
+                                    project_labels.append(category)
+                    except Exception:
+                        continue
+                    
+                    # For each label this project has, apply the average value if available
+                    for agg_label, true_labels in labels_map.items():
+                        match_labels = [agg_label] if true_labels is None else true_labels
+                        if any(label in project_labels for label in match_labels) and agg_label in label_averages:
+                            # For projectrank, replace 0 with average; for other properties, replace NaN with average
+                            if y_property == 'projectrank' and row[y_property] == 0:
+                                df.at[idx, y_property] = label_averages[agg_label]
+                            elif pd.isna(row[y_property]):
+                                df.at[idx, y_property] = label_averages[agg_label]
+            
+            # After interpolation, drop any remaining rows with missing property
+            df = df.dropna(subset=[y_property])
         
         # Process each project
         for _, row in df.iterrows():
@@ -312,6 +410,7 @@ class TimeSeriesVisualizer:
         labels: Union[List[str], Dict[str, Union[List[str], None]]] = None,
         aggregation_method: str = 'sum',
         time_step: int = 1,
+        interpolate_resource: bool = False,
     ) -> pd.DataFrame:
         """
         Process CSV files and aggregate data by label over time.
@@ -321,6 +420,11 @@ class TimeSeriesVisualizer:
             labels: List of labels or dict of aggregated labels to include
             aggregation_method: Method to aggregate values ('sum', 'mean', 'median')
             time_step: Sampling frequency for CSV files
+            interpolate_missing: Whether to include and interpolate projects with missing properties.
+                                 For resource-True projects (websites without code repositories), this will
+                                 assign them the average value of non-resource projects in the same label.
+                                 For projectrank, resource projects have a value of 0, not missing.
+                                 For other properties, resource projects may have missing values.
             
         Returns:
             DataFrame containing time series data
@@ -362,7 +466,7 @@ class TimeSeriesVisualizer:
                 logger.warning(f"Found {dup_count} duplicate project names in {file_path}")
             
             # Aggregate by label
-            label_values = self._aggregate_by_label(df, y_property, labels_map, aggregation_method)
+            label_values = self._aggregate_by_label(df, y_property, labels_map, aggregation_method, interpolate_resource)
             
             # Store results
             data_by_date[date] = label_values
@@ -533,6 +637,7 @@ def create_timeseries_visualization(
     xlabel: str = 'Date',
     ylabel: Optional[str] = None,
     dpi: int = 300,
+    interpolate_resource: bool = False,
 ) -> Tuple[pd.DataFrame, plt.Figure]:
     """
     Create a time series visualization of project metrics.
@@ -554,7 +659,12 @@ def create_timeseries_visualization(
         xlabel: X-axis label
         ylabel: Y-axis label
         dpi: Resolution for saved image
-        
+        interpolate_resource: Whether to include and estimate values for resource-True projects (websites).
+                          When True, resource-True projects (which are websites without code repositories)
+                          will be assigned the average value of non-resource projects in the same label.
+                          For projectrank, resource projects have a value of 0 by default.
+                          For other properties, resource projects may have missing values that will be estimated.
+
     Returns:
         Tuple containing the processed DataFrame and Matplotlib figure
     """
@@ -570,6 +680,7 @@ def create_timeseries_visualization(
         labels=labels,
         aggregation_method=aggregation_method,
         time_step=time_step,
+        interpolate_resource=interpolate_resource,
     )
     
     # Save data if requested

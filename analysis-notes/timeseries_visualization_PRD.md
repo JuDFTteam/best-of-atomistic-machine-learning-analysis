@@ -28,6 +28,7 @@ Create a stacked area chart or streamchart that shows the evolution of project m
 - **aggregation_method**: Method to aggregate property values (default: `sum`, options: `sum`, `mean`, `median`)
 - **normalize**: Whether to normalize values (default: `False`)
 - **time_step**: Sampling frequency for CSV files (default: `1` - use all files)
+- **interpolate_resource**: Whether to estimate values for resource-True projects (websites) (default: `False`)
 
 ### Label Aggregation
 - Support for aggregated labels where multiple true labels are combined
@@ -39,6 +40,7 @@ Create a stacked area chart or streamchart that shows the evolution of project m
 - Missing properties: Exclude from aggregation, print warning with count
 - Missing dates: Skip and continue
 - Duplicate project names: Print warning
+- Resource-True projects: Option to estimate their values based on non-resource projects in the same label
 
 ## Technical Design
 
@@ -83,7 +85,7 @@ Create a stacked area chart or streamchart that shows the evolution of project m
 - [x] Project requirements document
 - [x] Implementation completed
 - [x] Basic examples working
-- [ ] Add option to include projects with missing properties by interpolation (ask for clarification what this means)
+- [x] Add option to include resource-True projects via interpolation
 - [ ] Add option to smooth the timeseries data (ask for clarification what this means)
 - [ ] Advanced features and optimizations
 
@@ -96,6 +98,7 @@ Create a stacked area chart or streamchart that shows the evolution of project m
 - Some categories or labels found in CSV files might conflict with the ones in
   `analysis-dev/projects.yaml`. This can be if they have been renamed or
   removed.
+- Resource-True projects (websites without code repositories) can significantly impact metrics when included in visualizations. The `interpolate_resource` parameter allows for estimating their values based on non-resource projects in the same label.
 
 ## Lessons Learned
 
