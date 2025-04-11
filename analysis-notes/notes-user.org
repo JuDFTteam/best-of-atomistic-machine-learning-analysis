@@ -1,0 +1,19 @@
+<2025-04-08 Tue> Setup.
+
+- Via IDE (Windsurf), created Python env =../.venv=.
+  - Developer install of best-of-generator package =pip install -e .=
+  - Opened csv file via Data Wrangler extension. This installed dependencies
+    ipykernel and pandas.
+- Set up GitHub secret and library.io token for this project
+  - Stored in [[file:../tokens.txt][../tokens.txt]], added file to .gitignore
+- Created folder =analysis-dev=. Put stripped down ~projects.yaml~ in there (50
+  instead of 500 projects), for code development and testing
+- Tested if best-of-generator works locally (equivalent to update-best-of-list
+  GitHub action).
+  #+begin_src shell
+  cd analysis-dev
+  best-of generate -l LIBIOAPIKEY -g GITHUBSECRET projects.yaml
+  #+end_src
+- This produced correct =README.md= and =history= folder, no errors.
+- Time measurment: 50-project list took 1:30 min (CLI), 500-project list took 15 min (GitHub Action)
+  - Speed = ca. 1.8 sec / project

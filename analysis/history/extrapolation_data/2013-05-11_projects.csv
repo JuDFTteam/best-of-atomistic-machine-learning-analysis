@@ -1,0 +1,3 @@
+name,homepage,projectrank,category,labels
+cdk,https://github.com/cdk/cdk,5,rep-eng,"['cheminformatics', 'lang-java']"
+OpenML,https://github.com/openml/OpenML,0,community,['datasets']

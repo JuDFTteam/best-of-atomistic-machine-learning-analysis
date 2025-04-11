@@ -1,0 +1,788 @@
+* 2025-04-08 Project quality score
+** User
+At this point, let's just get a common understanding of the codebase.
+
+This project best-of-atomistic-machine-learning is a GitHub "best-of" list. Like
+an awesome list, but with integrated CI. The list maintainer only edits the file
+`projects.yaml` and the GitHub workflow @update-best-of-list.yml creates the
+README.md from that. Don't read those files, as they are pretty large and would
+fill up your context window too quickly. That is why I will only reference
+snippets of them here. Most project entries are version-controlled software
+packages or static information repositories (mostly GitHub, some GitLab), and a
+few which are just homepages (indicates by `resource: true`) fields. Here is an
+example of one project: project entry @projects.yaml#L994-1001 gets turned
+into@README.md#L2664-2675.
+
+The ingenius thing about this "best-of" list is that the human maintainer only
+has to enter the project in to the projects.yaml without any order, only taking
+care to get the basic metadata right (name, Git repo ID, best-guess category and
+labels, both defined in projects.yaml, license, etc.). So, the only thing the
+maintainer decides on his own is the category and the labels. Then the Action
+worfklow obtains a "project quality score" for each project and then ranks them
+according to this score and sorts them accordingly in the README. How the
+project quality score is calculated and how maintainers should edit the list is
+documented here @web
+https://raw.githubusercontent.com/best-of-lists/best-of-generator/refs/heads/main/README.md.
+
+Obviously, this list is a list of atomistic machine learning projects.
+
+Do you understand so far the point and working of this project, or do you have
+questions?
+** Assistant
+I understand that you want to establish a common understanding of the codebase.
+Let me search for the web resource you mentioned to get more context about how
+the "best-of" generator works.
+
+#+begin_example
+Searched web for "best-of-lists best-of-generator README.md GitHub"
+best-of-generator/docs/README.md at main · best-of-lists/best ... - GitHub
+GitHub - best-of-lists/best-of-generator: Generates a ranked list of ...
+Best-of Generator"," - GitHub
+10 Standout GitHub Profile READMEs - DEV Community
+AGRG: Awesome Github Readme Generator
+#+end_example
+
+Let me read the documentation to better understand how the best-of generator
+works:
+
+#+begin_example
+Created outline raw.githubusercontent.com
+View Page
+#+end_example
+
+Let me look at the most relevant chunks to understand how the best-of generator
+works, particularly focusing on the project quality score calculation and the
+structure of the projects.yaml file:
+
+#+begin_example
+Analyzed content `projects.yaml` Structure
+Analyzed content Projects
+Analyzed content 2 chunks
+#+end_example
+
+Yes, I understand the point and working of this project now. Let me summarize
+what I've learned:
+
+This "best-of-atomistic-machine-learning" project is a curated list of atomistic
+machine learning resources that uses the "best-of-generator" framework to:
+
+1. Allow maintainers to focus only on adding project metadata to projects.yaml
+2. Automatically generate a ranked README.md through GitHub Actions
+
+The key aspects of how it works:
+
+- Project Entry: Maintainers add projects to projects.yaml with basic metadata
+  (name, GitHub repo, category, labels, license, etc.)
+- Automated Ranking: The GitHub workflow (@update-best-of-list.yml) calculates a
+  "project quality score" for each entry
+- Score Calculation: The score is based on various metrics including:
+  - Documentation quality (homepage, description)
+  - GitHub metrics (stars, contributors, commits, forks, watchers)
+  - Release information (frequency, recency)
+  - Package manager metrics (downloads, dependencies)
+  - License type
+- Sorting: Projects are then sorted by this score within their categories
+- Rendering: The README.md is generated with projects displayed in a consistent
+  format with badges, stats, and installation instructions
+
+The example you shared shows how a project entry in projects.yaml (FAIRChem
+EquiformerV2 models) gets transformed into a detailed entry in the README with:
+
+- Project name, link, and description
+- License badge and code tags
+- GitHub stats (contributors, forks, issues, last update)
+- Package manager information (PyPI downloads, dependencies)
+- Installation instructions
+
+This approach is clever because it automates the tedious parts of maintaining a
+"awesome list" while ensuring projects are ranked objectively based on their
+popularity and maintenance status rather than the maintainer's subjective
+opinion.
+
+Is there anything specific about the project structure or workflow you'd like me
+to explore further?
+** User
+Yes, first one question. Where in the code (resp., Action workflows) is the data
+required for the project quality score actually scraped from the net, stored,
+and the score calculated and buffered or stored? I couldn't find it myself.
+** Assistant
+Let me help you find where the project quality score is calculated in the
+codebase. I'll need to look at the GitHub workflows and related files to
+understand how the data is scraped, stored, and how the score is calculated.
+
+First, let's look at the GitHub workflow file you mentioned:
+
+#+begin_example
+Searched filesystem
+1 result
+Searchedin~/src/github.com/judftteam/best-of-atomistic-machine-learning/.github/workflowswith pattern*update-best-of-list.yml
+#+end_example
+
+Let me examine the workflow file to understand how the project quality score is
+calculated:
+
+Analyzed
+
+#+begin_example
+update-best-of-list.yml:(1-200)
+#+end_example
+
+I see that the workflow file uses an action called
+best-of-lists/best-of-update-action@v0.8.5 to update the best-of list. This is
+likely where the data collection and score calculation happens. Let's look at
+the repository structure to find any local configuration or cache files that
+might be related to this process:
+
+#+begin_example
+Analyzed
+~/src/github.com/judftteam/best-of-atomistic-machine-learning
+#+end_example
+
+I notice there's a history directory that might contain historical data about
+project scores. Let's also check if there are any cache files or data storage
+mechanisms:
+
+#+begin_example
+Analyzed
+~/src/github.com/judftteam/best-of-atomistic-machine-learning/history
+#+end_example
+
+I see that there are CSV files in the history directory that appear to track
+project data over time. Let's look at one of these files to understand what data
+is being stored:
+
+#+begin_example
+Analyzed
+2025-04-08_projects.csv:(1-20)
+#+end_example
+
+Now I understand where the project quality score data is stored and calculated.
+Let me continue my investigation to find exactly where the data is scraped and
+the score is calculated.
+
+Let's look at the GitHub action that's being used in the workflow:
+
+#+begin_example
+Searched web for "best-of-lists/best-of-update-action GitHub source code"
+GitHub - best-of-lists/best-of-update-action: GitHub Action to update ...
+Releases · best-of-lists/best-of-update-action - GitHub
+best-of-update-action · Actions · GitHub Marketplace · GitHub
+Is there a way to push changes with a GitHub action?
+The Best GitHub Actions You Should Use - Continuously Merging
+#+end_example
+
+Let me look at the GitHub repository for the best-of-update-action to understand
+how it works:
+
+#+begin_example
+Created outline
+github.com
+View Page
+#+end_example
+
+Let me look at the most relevant content about the best-of-update-action:
+
+#+begin_example
+Analyzed content
+5 chunks
+#+end_example
+
+Now I understand how the project quality score is calculated and where the data
+is stored. Let me explain what I found:
+
+The project quality score calculation happens in the GitHub Action workflow
+that's running the best-of-lists/best-of-update-action@v0.8.5 action. This
+action is responsible for:
+
+1. Data Collection: The action scrapes data from various sources:
+  - GitHub API (for stars, contributors, commits, forks, watchers, issues)
+  - Package manager APIs (PyPI, Conda, npm, etc. for downloads and dependencies)
+  - Libraries.io API (which requires an API key stored as a secret)
+2. Score Calculation: The calculation follows the formula we saw in the
+   documentation, assigning points for various metrics like:
+  - Documentation quality (homepage, description)
+  - GitHub metrics (stars, contributors, commits, forks, watchers)
+  - Release information (frequency, recency)
+  - Package manager metrics (downloads, dependencies)
+  - License type
+3. Data Storage: The collected data and calculated scores are stored in:
+  - CSV files in the /history directory (e.g., 2025-04-08_projects.csv)
+  - These files contain all the raw metrics for each project and the calculated
+    projectrank score
+  - Each update creates a new timestamped CSV file, allowing for tracking
+    changes over time
+4. Workflow Process:
+  - The action runs on a schedule (every Thursday at 6pm according to the cron
+    job in the workflow)
+  - It creates a new branch for each update
+  - Collects all the data, calculates scores, and generates the README.md
+  - Creates a pull request with the changes
+  - Also creates a draft release with the changes
+
+The actual code that performs the data scraping and score calculation is in the
+best-of-generator package, which is used by the GitHub Action. The action is
+just a wrapper that runs this package in the GitHub Actions environment.
+
+The CSV files in the history directory show all the collected metrics that go
+into the score calculation, including GitHub stats (stars, forks, etc.), package
+manager stats (downloads, dependencies), and other metadata. The projectrank
+column in these files is the calculated project quality score that determines
+the ranking of projects in each category in the README.md.
+** User
+Oh yeah, you are right. The code for the data collection and score calculation
+is here @web https://github.com/best-of-lists/best-of-generator. It's all
+Python. The function `def calc_projectrank` is defined here @web
+https://raw.githubusercontent.com/best-of-lists/best-of-generator/refs/heads/main/src/best_of/projects_collection.py.
+** Assistant
+TODO format
+
+Let me check the specific function you mentioned in the best-of-generator repository to understand exactly how the project quality score is calculated:
+
+Created outline
+
+raw.githubusercontent.com
+View Page
+Let me look at the specific function that calculates the project quality score:
+
+Analyzed content
+Official Regex: https://semver.org/#is-there-a-suggested-regular-expression-regex-to-check-a-semver-string
+Let me search for the specific function that calculates the project quality score:
+
+Searched web for "best-of-generator calc_projectrank function github"
+
+GitHub - best-of-lists/best-of-generator: Generates a ranked list of ...
+
+best-of-generator/docs/README.md at main - GitHub
+
+Best-of Generator"," - GitHub
+
+GitHub
+
+GitHub README Stats Generator
+
+Let me look at the documentation for the projects_collection module to find the calc_projectrank function:
+
+Created outline
+
+raw.githubusercontent.com
+View Page
+Let me look at the specific calc_projectrank function to understand exactly how the project quality score is calculated:
+
+Analyzed content
+11 chunks
+I see that the documentation doesn't include the actual implementation of the calc_projectrank function. Let me look at the source code directly to understand how the project quality score is calculated:
+
+Created outline
+
+raw.githubusercontent.com
+View Page
+Let me look at the source code to find the calc_projectrank function:
+
+Analyzed content
+Official Regex: https://semver.org/#is-there-a-suggested-regular-expression-regex-to-check-a-semver-string
+Now I can see exactly how the project quality score is calculated in the calc_projectrank function. This is the core function that determines the ranking of projects in the best-of list.
+
+Here's a detailed breakdown of how the project quality score (projectrank) is calculated:
+
+Basic Information (1 point)
+Project has both a homepage and description: +1
+Source Repository (1 point)
+Project has a GitHub repository: +1
+License (1-2 points)
+Project has a license: +1
+License is permissive and common (not risky): +1
+Release Information (0-3 points)
+Project has multiple releases (>1): +1
+Project follows semantic versioning: +1
+Project has a recent release (within 6 months): +1
+Project Activity (0-2 points)
+Repository was updated within the last 3 months: +1
+Project is established (older than 6 months): +1
+Dependent Projects
+Number of dependent projects: +log(count)/1.5 (logarithmic scale)
+GitHub Metrics (all on logarithmic scales)
+Stars: +log(count)/2 - 1 (or -1 if zero stars)
+Forks: +log(count)/2
+Contributors: +log(count)/2 - 1
+Commit count: +log(count)/2 - 1
+Watchers: +log(count)/2 - 1 (or -1 if zero watchers)
+Closed issues: +log(count)/2 - 1 (or -1 if zero closed issues)
+Usage Metrics
+Monthly downloads: +log(count)/2 - 1 (or -1 if zero downloads)
+Recent commits (last 90 days): +log(count)/1.5 - 1 (or -1 if zero recent commits)
+The logarithmic scales for metrics like stars, downloads, and contributors ensure that the difference between projects with 100 vs. 200 stars is more significant than the difference between projects with 10,000 vs. 10,100 stars. This prevents extremely popular projects from completely dominating the rankings just because of their popularity.
+
+This score is then used to sort projects within their categories in the README.md, with higher scores appearing higher in the list. The history CSV files we looked at earlier store all these raw metrics along with the calculated projectrank score, allowing for tracking changes over time.
+* 2024-04-10 Full historical time series data retrieval not possible with current implementation
+** User
+Hey. This project is a fork of the
+https://github.com/best-of-lists/best-of-generator project (don't access the
+URL, this is just for info). Read the @README.md to understand what it does. The
+way this project is used on GitHub is that people create a new project based on
+the https://github.com/best-of-lists/best-of/generate template (don't access the
+URL). Then they edit the `projects.yaml` file by adding projects. Then they
+trigger a GitHub Action workflow run which as part of it, runs the Action
+https://github.com/best-of-lists/best-of-update-action (don't access the URL).
+This in turn installs the best-of-generator in a container and runs the CLI
+command `best-of generate -l LIBRAY_KEY -g GITHUB_TOKEN projects.yaml`. This
+command is defined in the @_cli.py module. It runs the `generate_markdown`
+function in @generator.py . This produces a `README.md` and a `history` folder
+with an MD and a CSV file. A small example with 50 projects is in the folder
+@analysis-dev .
+
+Understood so far?
+** Assistant
+I'll help you understand this project. Let me first take a look at the README.md
+to get a better understanding of what this project does.
+
+Analyzed
+
+README.md:(1-200) Now I'll look at the CLI module to understand how the command
+is defined:
+
+Analyzed
+
+_cli.py:(1-200) Now let me look at the generator.py file to understand how the
+markdown generation works:
+
+Analyzed
+
+generator.py:(1-200) Yes, I understand the project now. Let me summarize what
+I've learned:
+
+This project is a fork of the best-of-generator project, which is a tool that
+generates ranked markdown lists of awesome libraries and tools. Here's how it
+works:
+
+Purpose: The best-of-generator creates a beautiful markdown page that ranks and
+showcases open-source projects based on various metrics like GitHub stars,
+activity, and package manager statistics. Workflow: Users start by creating a
+project using the best-of template They edit the projects.yaml file to add their
+projects of interest A GitHub Action workflow is triggered, which runs the
+best-of-update-action This action installs the best-of-generator in a container
+and runs the CLI command: best-of generate -l LIBRARY_KEY -g GITHUB_TOKEN
+projects.yaml The command is defined in src/best_of/_cli.py and executes the
+generate_markdown function from src/best_of/generator.py The process generates a
+README.md file and a history folder with MD and CSV files Key Components:
+projects.yaml: The configuration file where users define projects, categories,
+labels, and settings generate_markdown(): The main function that processes the
+YAML file, collects project information, calculates scores, and generates the
+output The generator integrates with package managers (PyPI, NPM, Conda, Docker
+Hub) to collect metadata It calculates a project-quality score based on various
+metrics It can identify trending projects based on historical data Sample Data:
+The analysis-dev folder contains a small example with 50 projects. Is there
+anything specific about the project you'd like me to explain in more detail?
+** User
+Yes, that's correct. Now, what I want to do here is a timeseries data analysis.
+The whole functionality of this best-of-generator project (the upstream of this
+fork) is that someone has a best-of list on GitHub and this
+best-of-update-action is periodically triggered to update the README.md. But in
+this fork here, we want to bootstrap this functionality to do a more in-depth
+analysis and produce some nice plots for a scientific roadmap article,
+specifically a chapter therein, called "Tools for atomistic simulation and AI".
+I have my own best-of list,
+https://github.com/JuDFTteam/best-of-atomistic-machine-learning (don't access
+the URL). This is a A ranked list of awesome atomistic machine learning (AML)
+projects. ML interatomic potentials, ML electronic structure projects, data
+sets, community resources, etc. It has 500 projects. The example in the folder
+analysis-dev is a small subset of 50 projects of that full list. We will use
+that here to develop additional Python code to extend the existing code to do a
+more in-dpeth time series analysis of this. I will explain what I specifically
+mean by that in a moment. I want you to help me with extending the code, come up
+with good analysis angles for this, and produce the plots. Don't code or suggest
+a plan right now, just acknowledge.
+** Assistant
+I understand your goal completely. You want to extend this best-of-generator
+fork to perform time series analysis on your atomistic machine learning (AML)
+projects list. Instead of just generating a README with ranked projects, you
+want to develop additional Python code that can analyze the historical data more
+deeply and produce visualizations for a scientific roadmap article chapter
+titled "Tools for atomistic simulation and AI."
+
+The analysis-dev folder with 50 projects will serve as our development dataset,
+though the full list contains around 500 projects. This is a great approach for
+developing and testing the extended functionality before applying it to the
+larger dataset.
+
+I'm ready to help you extend the code, develop meaningful analysis approaches,
+and create insightful visualizations that would be valuable for your scientific
+publication. Just let me know when you'd like to start discussing specific
+analysis angles or implementation details.
+** User
+Okay. Before we start coding, let me describe the end goal and the design
+choices we need to consider along the way.
+
+1) First, we need to find out whether the current code is actually capable of
+   retrieving the data that we need to create the time series. What is this
+   data? To explain, I have looked at the CSV file that is created in the
+   history folder by the `best-of generate ...` command. This table has one row
+   per project in the projet.yaml file. The number of columns may vary of which
+   kind of projects are present in the YAML file. For instance, if no projects
+   hosted via Maven are present, then no Maven-related columns appear in the CSV
+   file. Below I have extracted all column names present in the latest CSV file
+   from the complete projects.yaml. This table has ca. 500 rows and 61 columns.
+   Here are all column names.
+
+All column names: ['Unnamed: 0', 'name', 'resource', 'category', 'homepage',
+'description', 'projectrank', 'show', 'license', 'labels', 'github_id',
+'github_url', 'created_at', 'updated_at', 'last_commit_pushed_at',
+'commit_count', 'recent_commit_count', 'fork_count', 'watchers_count',
+'pr_count', 'open_issue_count', 'closed_issue_count', 'star_count',
+'latest_stable_release_published_at', 'latest_stable_release_number',
+'release_count', 'contributor_count', 'pypi_id', 'conda_id',
+'dependent_project_count', 'github_dependent_project_count', 'pypi_url',
+'pypi_latest_release_published_at', 'pypi_dependent_project_count',
+'pypi_monthly_downloads', 'monthly_downloads', 'conda_url',
+'conda_latest_release_published_at', 'conda_total_downloads',
+'projectrank_placing', 'dockerhub_id', 'dockerhub_url',
+'dockerhub_latest_release_published_at', 'dockerhub_stars', 'dockerhub_pulls',
+'github_release_downloads', 'maven_id', 'maven_url',
+'maven_latest_release_published_at', 'maven_dependent_project_count', 'npm_id',
+'npm_url', 'npm_latest_release_published_at', 'npm_dependent_project_count',
+'npm_monthly_downloads', 'trending', 'gitlab_id', 'gitlab_url',
+'updated_github_id', 'ignore', 'docs_url']
+
+Now I separate these columns into "static" and "dynamic" column names. With
+that, I mean that we can assume, that if we were to retrieve this information
+via the best-of generator script at different times, the static columns would
+remain the same, the dynamic ones would change. So, the dynamic ones is actually
+what we need for our time series.
+
+Static column names only: ['Unnamed: 0', 'name', 'resource', 'category',
+'homepage', 'description', 'license', 'labels', 'github_id', 'github_url',
+'pypi_id', 'conda_id', 'pypi_url', 'conda_url', 'dockerhub_id', 'dockerhub_url',
+'maven_id', 'maven_url', 'npm_id', 'npm_url', 'gitlab_id', 'gitlab_url',
+'updated_github_id', 'ignore', 'docs_url' ]
+
+Dynamic column names only: ['projectrank', 'show', 'created_at', 'updated_at',
+'last_commit_pushed_at', 'commit_count', 'recent_commit_count', 'fork_count',
+'watchers_count', 'pr_count', 'open_issue_count', 'closed_issue_count',
+'star_count', 'latest_stable_release_published_at',
+'latest_stable_release_number', 'release_count', 'contributor_count',
+'dependent_project_count', 'github_dependent_project_count',
+'pypi_latest_release_published_at', 'pypi_dependent_project_count',
+'pypi_monthly_downloads', 'monthly_downloads',
+'conda_latest_release_published_at', 'conda_total_downloads',
+'projectrank_placing', 'dockerhub_latest_release_published_at',
+'dockerhub_stars', 'dockerhub_pulls', 'github_release_downloads',
+'maven_latest_release_published_at', 'maven_dependent_project_count',
+'npm_latest_release_published_at', 'npm_dependent_project_count',
+'npm_monthly_downloads', 'trending']
+
+What I want you to do now, is to analyze the source code that retrieves this
+data during the best-of generate run. Look into the files for retrieval from
+conda, dockerhub, github, gitlab, maven, npm, pypi. These files are
+@conda_integration.py, @dockerhub_integration.py, @github_integration.py,
+@gitlab_integration.py, @maven_integration.py, @npm_integration.py,
+@pypi_integration.py. Try to find out whether these actually allow to provide a
+specific date or timestamp for which this dynamic data is retrieved from these
+repositories. For instance, for the time series, for project X we would like to
+be able to fill the dynamic columns for the years 2020, 2021, 2023 (Jan 1,
+each). How many downloads did project X have in 2020, 2021, 2023? I the code
+does NOT provide that functionality for all these repos, then we have to think
+about another way to get some or all of these fields.
+** Assistant
+TODO format
+
+Let me check the remaining integration files to complete my analysis. I'll look at the Docker Hub integration:
+
+Analyzed
+
+dockerhub_integration.py:(1-200)
+Let me check the libraries.io integration since it might provide historical data capabilities:
+
+Analyzed
+
+libio_integration.py:(1-200)
+Based on my analysis of the integration files, I can now provide you with insights about the time series data capabilities of the current codebase.
+
+Analysis of Historical Data Retrieval Capabilities
+After examining the integration files for GitHub, PyPI, Conda, Docker Hub, and libraries.io, I've found that none of these integrations support retrieving historical data for specific past dates. Here's what I found:
+
+GitHub Integration:
+The GitHub integration uses the current GitHub API to fetch the latest data
+It does track "recent activity" but only for a fixed window (90 days from the current date)
+No functionality to request data as it existed at a specific past date
+PyPI Integration:
+Uses pypistats to get the current monthly download count
+No historical download statistics for past dates
+Only retrieves the latest release information
+Conda Integration:
+Retrieves current download counts and latest release info
+Calculates monthly downloads by dividing total downloads by months since creation
+No way to get historical download counts for specific dates
+Docker Hub Integration:
+Similar to Conda, gets current pull counts and star counts
+No historical data retrieval capabilities
+Libraries.io Integration:
+Provides additional metadata about packages
+No historical data retrieval functionality
+Implications for Your Time Series Analysis
+Since the current integrations don't support retrieving historical data directly, we have two main approaches for your time series analysis:
+
+Use the existing history folder data:
+The best-of generate command already creates CSV files in the history folder with timestamps
+We could analyze these files to create time series data based on when the command was run
+This would give us snapshots over time, but only from when the command was executed
+Extend the code to retrieve historical data:
+We would need to implement new functionality to query historical data
+For GitHub, we might be able to use the GitHub API to get commit history and reconstruct some metrics
+For package managers, we'd need to find alternative data sources that provide historical data
+Next Steps
+Given these limitations, I recommend we:
+
+First examine the history folder to see what data is already available from past runs
+Develop a strategy to either:
+Use the existing snapshots to create time series visualizations
+Extend the code to retrieve additional historical data where possible
+Consider alternative data sources for metrics that can't be retrieved historically
+Would you like me to examine the history folder in the analysis-dev directory to see what data is already available, or would you prefer to discuss approaches for extending the code to retrieve historical data?
+** User
+No, don't analyze the data yet. Okay. That's a bummer. Because what I wanted to
+do is to get all these statistics for each project at regular intervals (say
+each yearly quarter) since the specific projects `created_at` date. Then we
+would have had the full time series data for each project since its inception.
+By the way, how is the `created_at` data generated? I expect it comes either
+from the project's github_id or gitlab_id.
+** Assistant
+TODO format
+
+You're right, it is disappointing that the integrations don't support retrieving historical data at specific time points. Let me look at how the created_at field is generated to better understand what data we do have access to.
+
+Cascade error
+No credits consumed on this tool call.
+Let me fix the error in my search:
+
+Searched codebase
+29 results
+Searched insrc/best_of/integrationswith querycreated_atincluding patterns*.py
+Let me check the GitHub integration in more detail to understand how the created_at field is populated:
+
+Analyzed
+
+github_integration.py:(281-300)
+Based on my analysis, I can confirm that the created_at field is primarily sourced from the repository's creation date on GitHub or other hosting platforms. Here's how it works:
+
+GitHub Integration:
+The created_at field comes from the GitHub API's createdAt property, which represents when the repository was first created on GitHub
+The code specifically uses the oldest date available if multiple sources provide creation dates (lines 289-291)
+GitLab Integration:
+Similarly pulls the creation date from GitLab's API
+Package Managers (Conda, PyPI, etc.):
+These also contribute creation dates, but the system always uses the oldest date if multiple sources are available
+This ensures the created_at field represents the earliest known existence of the project
+This is unfortunate for your time series analysis goals since you wanted to track metrics at regular intervals since each project's inception. The current system only captures the current state of metrics when the generator is run, not historical values.
+
+Potential Approaches
+Given these limitations, here are some approaches we could consider:
+
+GitHub API Historical Data:
+While the current integrations don't support it, GitHub's API does provide some historical data
+We could extend the code to use GitHub's API to retrieve star counts, fork counts, and commit activity at specific points in time
+This would require implementing new API calls and potentially using GraphQL for more complex queries
+Web Archive Data:
+For some metrics, we might be able to use web archives (like the Wayback Machine) to retrieve historical snapshots of project pages
+This would be more complex but could provide data for popular projects
+Alternative Data Sources:
+There are third-party services that track GitHub repositories over time
+For example, GHTorrent provides historical GitHub data
+Simulated Historical Data:
+For metrics that grow somewhat predictably (like stars), we might be able to use mathematical models to estimate historical values
+This would be less accurate but could provide reasonable approximations for visualization
+Focus on Available History Data:
+We could focus on analyzing the history data that is already being collected by the best-of generator
+While this won't go back to each project's creation, it would provide time series data from when you started running the generator
+Would you like to pursue any of these approaches? I can help you implement extensions to the code to retrieve more historical data where possible.
+** User
+Okay, let's go with analyzing what we have from the best-of-generator CSV files.
+That goes back to 2023-06, at least.
+
+I discard the original idea because I only have a few hours left to submit the
+manuscript. But I will do the full historical analysis with the appropriate
+implementation at a later time for a publication solely dedicated to this list.
+
+Before we go into implementing our alternative choice, this is for my personal
+reference for the future full historical analysis. I already chatted with Claude
+about how to do this, here: "Extracting Historical Usage Data for GitHub, PyPI,
+and Conda Packages", URL
+https://claude.ai/chat/6b97c2ac-ca6e-4f21-99ad-5c257d161eeb (don't analyze the
+URL). It pointed out some nice options and services that could enable this.
+
+Just acknowledge.
+** Assistant
+I understand your decision to focus on analyzing the existing CSV files from the
+best-of-generator that go back to 2023-06. This is a practical approach given
+your manuscript deadline constraints.
+
+It's good that you've already explored options for a more comprehensive
+historical analysis in your conversation with Claude about extracting historical
+data for GitHub, PyPI, and Conda packages. Having that reference will be
+valuable when you revisit this for a dedicated publication about your list.
+
+Let's proceed with analyzing the available data from the best-of-generator CSV
+files to create meaningful visualizations and insights for your manuscript.
+* Extrapolation feature
+** User
+
+You got very close to the mark with your analysis. But there is a little more
+subtlety, that will also inform our solution to this. Let me explain. Yes, the
+data was collected in periodic batches. The step changes occur when the
+maintainer of the best-of-atomistic-machine list did a major update to the list
+(ie, the projects.yaml file), adding a whole bunch of new projects more or less
+all in one go (or a few, but in a short time interval). Then months went by with
+hardly any new project addition.
+
+The way I'd like to tackle this is first of all, with an optional function
+parameter `smooth_additions`, default False. If False, then everything stays as
+it is now. If True, then our function attempts to smooth out these step change -
+creating batch additions to the data source. Our strategy will be to consider
+the CSV column `created_at`. This is the date not when the project has been
+added to the best-of-atomistic-machine-learning list, but when its repo (GitHub
+or GitLab) has been created. Even though the CSV data only goes back to
+2023-06-09, cause that's when the first projects were added to the
+best-of-atomistic-machine-learning list, some of the projects added are actually
+way older, some go as far back as 2010. In any case, the created_at value is
+logically always older than the current CSV file's date value. So, what we can
+do, is to assume, that a particular project that already existed since time date
+x, was added to the list at date y (y is the respective CSV file's date), and
+then we have timeseries data for that project until time z (usually until the
+latest CSV file, but for a few projects this ends earlier, since it was renamed
+or removed; but this is of no consequence here). So, then we can take the
+timeseries in range [y,z] and use it to extrapolate the earlier time period from
+project creation to list addition [x,y]. Here we take care that we extrapolate
+correctly, so, linear if the growth is linear, non-linear if not with a good
+functional estimate, just the simple but tried and tested best-practice from
+numerical methods toolbox.
+
+I assume that our current code first loops over all CSV files forward from
+oldest to newst date and then inside over the specified labels. Now if we do
+this smoothing, that won't work anymore, since at each date (CSV file), we'll be
+creating more data to take into account in the past. And we have to store this
+somewhere. I imagine that we can create a subdirectory `smoothing_data` in the
+data directory that the function was given, and there create CSV files that hold
+the extrapolated [x,y] data for each project. The only way and order I can think
+of to do this, is to do not one, but three passes through the CSV files when
+smoothing is turned on. In the first pass-through, the normal non-smoothing
+procedure is done, but without project aggregation in labels. Instead, we simply
+collect [y,z] timeseries for all projects. But we have to buffer or store these
+now, project-wise, not aggregated. In the second pass-through, this data is used
+to extrapolate backwards the [x,y] timerange, where x we get from the project's
+`created_at` column, which should be the same value across all CSV files (but we
+don't have to check that last part, just assume it's true). The [x,y] data for
+each project must also be buffered or stored. Since we don't have intermediate
+dates in that timerange, we must also first create them before we can
+extrapolate the property' value at that date. For the date series, we just use
+the timestep interval provided to the function, and create as many dates as
+needed in that timestep backwards to the created_at date. That is for all dates
+x2 < y. But for the range [y,z], we have to take special care. In date range
+[y,z], we now have to aggregate from two CSV files, the original one and the
+smoothing one. Because many projects were added later to the project than date
+x, we also have to extrapolate backwards for them in the range [y,y2], where y2
+< z. Here we take care that we use the same date as we would use for the
+original CSV file.
+
+Now we can do the third and final pass forwards through the CSV files. The
+earliest CSV file is now not the original oldest CSV file anymore, but very
+probably the first = oldest date smoothing CSV file with the extrapolated [x,y]
+data for that project. Then we pass forward as before, for each date, aggregrate
+the project's property values by label, but now always from either one CSV file
+(the smooting one in [x,y] date range), or from both original CSV file and
+extrapolated smoothing CSV file (in [y,z] range). Afterwards, the smoothing CSV
+folder could be deleted, but maybe that could also be an boolean option, if sn
+wants to keep that data.
+
+Clear so far?
+** User v2
+We'll implement this extrapolation approach in a completely new module, so as
+not to overload the existing module @timeseries_visualization.py with too much
+functionality.
+
+We'll do the implementation in small steps and test each along the way.
+
+The module's functionality is to create a new synthesized dataset of
+extrapolation and original data. Once that is created, we can use the existing
+module to plot it without any modification to the existing module.
+
+The new module's class and possibly function will have a subset of the input
+parameters of the existing module:
+
+- y_property: str = 'projectrank'
+- time_step: int = 1
+- history_dir: Optional[str] = None
+
+In addition, we need these parameters.
+
+- extrapolate_timesteps = 1
+- extrapolate_timesteps_unit = 'year'
+- extropolate_keep_data = False
+
+Timestep units accepted values are 'day', 'month', 'year'. Internally, the
+extrapolation timestep will be converted into a timedelta object.
+
+Now we need to create the synthesized data.
+
+First step. We want to have a list of the primary keys (PKs) of all existing
+projects. We define the PK as the tuple of the two columns `name` and
+`homepage`. We also want to have the earliest `created_at` date. To get both, we
+define two sets `unique_project_keys` and `created_dates`. Then we put all PKs
+and all `created_at` dates from all projects in all original CSV files into
+thoses sets. We sort the PK set and get the min (earliest) date from the
+`created_dates`.
+
+Implement this in the new module and test it with the original CSV files from
+the history folder.
+
+----------
+
+Good.
+
+Second step.
+
+We create a list `original_region_date_sequence`. As in the old module, we take
+care that the date of the first (earliest) and last (latest) original CSV file
+are included. I'll also refer to these two dates as y and z sometimes, and the
+date range [y,z] as the original data region range. Then we use the `time_step`
+to pick the dates from the CSV filenames inbetween. So for `time_step=1` we take
+the first file's date, the second, and so on, last date included. For
+`time_step=2`, we take every other file's date, and so on, last date included.
+
+Now create a new temporary subfolder extrapolation_data in the folder of the
+original data. We copy all of the original CSV files there whose dates are in
+the `original_region_date_sequence`. We'll exclusively work with the data in
+this subfolder from now on.
+
+----------
+
+Now we clean up the copied original CSV files a bit.
+
+
+Then we'll create a temporary new subfolder in the original CSV files folder
+`extrapolation_data`, and create empty CSV files there for each date in the
+`extrapolation_region_date_sequence`. Then we copy the subselection of original
+CSV files that are in the `original_region_date_sequence`, also into that
+subfolder. We will now only read and write data from that subfolder.
+
+
+
+Next,  look at the original CSV file with the latest date and extract from the
+column `created_at` the earliest date. This is the creation date of the oldest project.
+
+Then we create the `extrapolation_region_date_sequence` using the
+`extrapolate_timesteps` and `extrapolate_timesteps_unit` arguments. These are
+the dates in the aforementioned [x,y] (extrapolation region) range, for which
+property value will be extrapolated for each project, starting from the date
+that falls within the project's own creation date. The last date in this
+sequence must lie before the y = earliest date of the original CSV files, so
+truncate the sequence if needed.
+
+
+Now we will do three passes (loops) over the CSV files in that subfolder.
+
+
+First pass. We loop over all copied original CSV files, the ones in the
+`original_region_date_sequence` range. In this pass, we collect the time series
+values of the selected property for each project separately. This can be done
+for instance in a dataframe, where one axis is the
+`original_region_date_sequence`, and the other axis the project names.
+
+Second pass.

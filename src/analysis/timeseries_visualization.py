@@ -519,6 +519,8 @@ class TimeSeriesVisualizer:
         xlabel: str = 'Date',
         ylabel: Optional[str] = None,
         dpi: int = 300,
+        stack_order: Optional[List[str]] = None,
+        legend_order: Optional[List[str]] = None,
     ) -> plt.Figure:
         """
         Generate a stacked area chart or stream graph from the processed data.
@@ -533,6 +535,10 @@ class TimeSeriesVisualizer:
             xlabel: X-axis label
             ylabel: Y-axis label
             dpi: Resolution for saved image
+            stack_order: List of column names defining the order of stacking (bottom to top)
+                         If None, uses the original column order
+            legend_order: List of column names defining the order in the legend
+                          If None, follows the stack_order or original column order
             
         Returns:
             Matplotlib figure object
@@ -542,6 +548,21 @@ class TimeSeriesVisualizer:
         
         # Create a copy of the data for plotting
         plot_data = self.timeseries_data.copy()
+        
+        # Reorder columns if stack_order is specified
+        if stack_order is not None:
+            # Validate that all columns in stack_order exist in the DataFrame
+            missing_cols = [col for col in stack_order if col not in plot_data.columns]
+            if missing_cols:
+                raise ValueError(f"The following columns in stack_order do not exist in the data: {missing_cols}")
+            
+            # Check if all columns from the original data are included in stack_order
+            missing_from_order = [col for col in plot_data.columns if col not in stack_order]
+            if missing_from_order:
+                logger.warning(f"The following columns are not included in stack_order and will be excluded: {missing_from_order}")
+            
+            # Reorder columns according to stack_order
+            plot_data = plot_data[stack_order]
         
         # Normalize if requested
         if normalize:
@@ -573,13 +594,31 @@ class TimeSeriesVisualizer:
             # Default to a set of distinct colors
             colors = sns.color_palette("husl", len(plot_data.columns))
         
+        # Determine legend order
+        if legend_order is None:
+            # If no legend_order is specified, use the same order as the stack
+            legend_labels = plot_data.columns
+        else:
+            # Validate that all columns in legend_order exist in the DataFrame
+            missing_cols = [col for col in legend_order if col not in plot_data.columns]
+            if missing_cols:
+                raise ValueError(f"The following columns in legend_order do not exist in the data: {missing_cols}")
+            
+            # Use the specified legend order
+            legend_labels = legend_order
+            
+            # Check if all columns from the plot data are included in legend_order
+            missing_from_legend = [col for col in plot_data.columns if col not in legend_order]
+            if missing_from_legend:
+                logger.warning(f"The following columns are not included in legend_order: {missing_from_legend}")
+        
         # Create the plot
         if plot_type == 'stacked':
-            ax.stackplot(x, y, labels=plot_data.columns, colors=colors, alpha=0.8)
+            ax.stackplot(x, y, labels=legend_labels, colors=colors, alpha=0.8)
         elif plot_type == 'stream':
             # For stream graph, center the stacked areas
             baseline = 'sym'  # symmetric baseline
-            ax.stackplot(x, y, labels=plot_data.columns, colors=colors, alpha=0.8, baseline=baseline)
+            ax.stackplot(x, y, labels=legend_labels, colors=colors, alpha=0.8, baseline=baseline)
         else:
             raise ValueError(f"Unknown plot type: {plot_type}")
         
@@ -638,6 +677,8 @@ def create_timeseries_visualization(
     ylabel: Optional[str] = None,
     dpi: int = 300,
     interpolate_resource: bool = False,
+    stack_order: Optional[List[str]] = None,
+    legend_order: Optional[List[str]] = None,
 ) -> Tuple[pd.DataFrame, plt.Figure]:
     """
     Create a time series visualization of project metrics.
@@ -664,6 +705,10 @@ def create_timeseries_visualization(
                           will be assigned the average value of non-resource projects in the same label.
                           For projectrank, resource projects have a value of 0 by default.
                           For other properties, resource projects may have missing values that will be estimated.
+        stack_order: List of column names defining the order of stacking (bottom to top)
+                     If None, uses the original column order
+        legend_order: List of column names defining the order in the legend
+                      If None, follows the stack_order or original column order
 
     Returns:
         Tuple containing the processed DataFrame and Matplotlib figure
@@ -698,6 +743,8 @@ def create_timeseries_visualization(
         xlabel=xlabel,
         ylabel=ylabel,
         dpi=dpi,
+        stack_order=stack_order,
+        legend_order=legend_order,
     )
     
     return df, fig

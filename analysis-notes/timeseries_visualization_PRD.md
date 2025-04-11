@@ -86,7 +86,7 @@ Create a stacked area chart or streamchart that shows the evolution of project m
 - [x] Implementation completed
 - [x] Basic examples working
 - [x] Add option to include resource-True projects via interpolation
-- [ ] Add option to smooth the timeseries data (ask for clarification what this means)
+- [ ] Add option to extrapolate single project data backwards to the project's creation data
 - [ ] Advanced features and optimizations
 
 ## Notes and Considerations

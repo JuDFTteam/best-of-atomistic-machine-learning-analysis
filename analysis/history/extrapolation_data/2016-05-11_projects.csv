@@ -1,0 +1,19 @@
+name,homepage,projectrank,category,labels
+DeepChem,https://deepchem.io/,0,general-tools,
+RDKit,https://www.rdkit.org/,0,general-tools,['C++']
+Matminer,https://hackingmaterials.github.io/matminer/,0,general-tools,
+QUIP,https://libatoms.github.io/,0,general-tools,
+OpenKIM,https://openkim.org/,1,mlp,['knowledgebase']
+Sketchmap,https://github.com/lab-cosmo/sketchmap,0,unsupervised,
+fplib,https://github.com/zhuligs/fplib,0,representations,"['C', 'single-paper']"
+SOAPxx,https://github.com/capoe/soapxx,0,representations,['C++']
+COSMO Toolbox,https://github.com/lab-cosmo/toolbox,0,math,
+DeepChem,https://github.com/deepchem/deepchem,0,general-tools,
+RDKit,https://github.com/rdkit/rdkit,6,general-tools,['C++']
+Matminer,https://github.com/hackingmaterials/matminer,0,general-tools,
+QUIP,https://github.com/libAtoms/QUIP,5,general-tools,
+cdk,https://github.com/cdk/cdk,11,rep-eng,"['cheminformatics', 'lang-java']"
+MPContribs,https://github.com/materialsproject/MPContribs,2,datasets,
+OpenML,https://github.com/openml/OpenML,4,community,['datasets']
+fplib,https://github.com/Rutgers-ZRG/libfp,0,rep-eng,"['lang-c', 'single-paper']"
+SMACT,https://github.com/WMD-group/SMACT,0,materials-discovery,"['htc', 'structure-prediction', 'electrostatics']"

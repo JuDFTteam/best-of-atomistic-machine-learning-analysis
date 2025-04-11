@@ -1,0 +1,21 @@
+name,dependent_project_count,category,labels
+PyG Models,8647.0,rep-learn,['general-ml']
+Deep Graph Library (DGL),3951.0,rep-learn,
+RDKit,926.0,general-tool,"['lang-cpp', 'cheminformatics']"
+DeepChem,580.0,general-tool,
+e3nn,488.0,rep-learn,
+Matminer,441.0,general-tool,
+dgl-lifesci,320.0,rep-learn,
+DScribe,269.0,rep-eng,
+dpdata,179.0,data-structures,
+JARVIS-Tools,152.0,general-tool,
+ChemDataExtractor,136.0,language-models,['literature-data']
+SchNetPack,105.0,rep-learn,
+MatGL (Materials Graph Library),98.0,rep-learn,"['ml-iap', 'pretrained', 'multifidelity']"
+MEGNet,95.0,ml-iap,['multifidelity']
+Molfeat,74.0,general-tool,"['cheminformatics', 'rep-eng', 'rep-learn', 'generative', 'language-models', 'pretrained']"
+JAX-MD,74.0,md,
+e3nn-jax,70.0,rep-learn,
+OPTIMADE Python tools,67.0,datasets,
+TorchANI,61.0,ml-iap,
+SMACT,54.0,materials-discovery,"['htc', 'structure-prediction', 'electrostatics']"

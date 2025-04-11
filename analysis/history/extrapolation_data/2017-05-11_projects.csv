@@ -1,0 +1,31 @@
+name,homepage,projectrank,category,labels
+DeepChem,https://deepchem.io/,0,general-tools,
+RDKit,https://www.rdkit.org/,0,general-tools,['C++']
+Matminer,https://hackingmaterials.github.io/matminer/,0,general-tools,
+DScribe,https://github.com/SINGROUP/dscribe,0,representations,
+QUIP,https://libatoms.github.io/,0,general-tools,
+MAST-ML,https://github.com/uw-cmg/MAST-ML,0,general-tools,
+QML,http://www.qmlcode.org/,0,general-tools,
+ANI-1,https://github.com/isayev/ASE_ANI,0,mlp,
+OpenKIM,https://openkim.org/,2,mlp,['knowledgebase']
+Sketchmap,https://github.com/lab-cosmo/sketchmap,1,unsupervised,
+RDKit Tutorials,https://github.com/rdkit/rdkit-tutorials,0,educational,
+DTNN,https://github.com/atomistic-machine-learning/dtnn,0,representation-learning,
+fplib,https://github.com/zhuligs/fplib,0,representations,"['C', 'single-paper']"
+SOAPxx,https://github.com/capoe/soapxx,0,representations,['C++']
+COSMO Toolbox,https://github.com/lab-cosmo/toolbox,1,math,
+DeepChem,https://github.com/deepchem/deepchem,5,general-tools,
+RDKit,https://github.com/rdkit/rdkit,9,general-tools,['C++']
+Matminer,https://github.com/hackingmaterials/matminer,3,general-tools,
+QUIP,https://github.com/libAtoms/QUIP,8,general-tools,
+QML,https://github.com/qmlcode/qml,0,general-tools,
+cdk,https://github.com/cdk/cdk,13,rep-eng,"['cheminformatics', 'lang-java']"
+MPContribs,https://github.com/materialsproject/MPContribs,5,datasets,
+TensorMol,https://github.com/jparkhill/TensorMol,0,ml-iap,['single-paper']
+PROPhet,https://github.com/biklooost/PROPhet,0,ml-dft,"['ml-iap', 'md', 'single-paper', 'lang-cpp']"
+ChemDataExtractor,https://github.com/mcs07/ChemDataExtractor,0,language-models,['literature-data']
+dlpack,https://github.com/dmlc/dlpack,0,data-structures,['lang-cpp']
+OpenML,https://github.com/openml/OpenML,6,community,['datasets']
+fplib,https://github.com/Rutgers-ZRG/libfp,1,rep-eng,"['lang-c', 'single-paper']"
+SMACT,https://github.com/WMD-group/SMACT,0,materials-discovery,"['htc', 'structure-prediction', 'electrostatics']"
+MPDS API,https://github.com/mpds-io/mpds-api,0,datasets,['phase-transition']

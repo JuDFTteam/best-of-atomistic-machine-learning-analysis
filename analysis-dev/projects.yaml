@@ -1,0 +1,861 @@
+# ############################################################
+# This is an extract /of the complete projects.yaml file from
+# https://github.com/JuDFTteam/best-of-atomistic-machine-learning, version
+# https://github.com/JuDFTteam/best-of-atomistic-machine-learning/releases/tag/2025.04.08,
+# with the full config but only a small subset of all projects in the complete file,
+# for development and testing of the analysis pipeline.
+#
+# Cropped content, compared to the complete file, is marked with the block
+# # #############################
+# # --->>> CONTENT CROPPED <<<---
+# # #############################
+#
+# ############################################################
+configuration:
+  #
+  #
+  #
+  # ######################################################################
+  # Reference: https://github.com/best-of-lists/best-of-generator
+  # ######################################################################
+  #
+  #
+  #
+  min_stars: 5
+  # require_github: True
+  max_trending_projects: 5
+  allowed_licenses: ["all"]
+  require_license: false
+  hide_license_risk: true
+  require_repo: false
+  max_description_length: 300
+  min_projectrank: 5
+  hide_empty_categories: true
+  # allowed_licenses:
+  #   [
+  #     "Unlicensed",
+  #     "Apache-2.0",
+  #     "MIT",
+  #     "BSD-3-Clause",
+  #     "BSD-2-Clause",
+  #     "ISC",
+  #     "MPL-2.0",
+  #     "LGPL-2.1"
+  #   ]
+  markdown_header_file: "config/header.md"
+  markdown_footer_file: "config/footer.md"
+  projects_history_folder: "history"
+
+# ################################################################################
+# ################################################################################
+categories:
+  # # categories example.
+  # - category: "data-engineering"
+  #   title: "Machine Learning & Data Engineering"
+  #   subtitle: "Best-of lists about machine learning, data engieering, data science, or other topics related to big data."
+  #
+  # # categories template.
+  # - category: ""
+  #   title: ""
+  #   subtitle: ""
+  - category: "active-learning"
+    title: "Active learning"
+    subtitle: "Projects that focus on enabling active learning, iterative learning schemes for atomistic ML."
+  - category: "community"
+    title: "Community resources"
+    subtitle: "Projects that collect atomistic ML resources or foster communication within community."
+  - category: "datasets"
+    title: "Datasets"
+    subtitle: "Datasets, databases and trained models for atomistic ML."
+  - category: "data-structures"
+    title: "Data Structures"
+    subtitle: "Projects that focus on providing data structures used in atomistic machine learning."
+  - category: "ml-dft"
+    title: "Density functional theory (ML-DFT)"
+    subtitle: "Projects and models that focus on quantities of DFT, such as density functional approximations (ML-DFA), the charge density, density of states, the Hamiltonian, etc."
+  - category: "educational"
+    title: "Educational Resources"
+    subtitle: "Tutorials, guides, cookbooks, recipes, etc."
+  - category: "xai"
+    title: "Explainable Artificial intelligence (XAI)"
+    subtitle: "Projects that focus on explainability and model interpretability in atomistic ML."
+  - category: "ml-esm"
+    title: "Electronic structure methods (ML-ESM)"
+    subtitle: "Projects and models that focus on quantities of electronic structure methods, which do not fit into either of the categories ML-WFT or ML-DFT."
+  - category: "general-tool"
+    title: "General Tools"
+    subtitle: "General tools for atomistic machine learning."
+  - category: "generative"
+    title: "Generative Models"
+    subtitle: "Projects that implement generative models for atomistic ML."
+  - category: "ml-iap"
+    title: "Interatomic Potentials (ML-IAP)"
+    subtitle: "Machine learning interatomic potentials (aka ML-IAP, MLIAP, MLIP, MLP) and force fields (ML-FF) for molecular dynamics."
+  - category: "language-models"
+    title: "Language Models"
+    subtitle: "Projects that use (large) language models (LMs, LLMs) or natural language procesing (NLP) techniques for atomistic ML."
+  - category: "materials-discovery"
+    title: "Materials Discovery"
+    subtitle: "Projects that implement materials discovery methods using atomistic ML."
+  - category: "math"
+    title: "Mathematical tools"
+    subtitle: "Projects that implement mathematical objects used in atomistic machine learning."
+  - category: "md"
+    title: "Molecular Dynamics"
+    subtitle: "Projects that simplify the integration of molecular dynamics and atomistic machine learning."
+  - category: "probabilistic"
+    title: "Probabilistic ML"
+    subtitle: "Projects that focus on probabilistic, Bayesian, Gaussian process and adversarial methods for atomistic ML, for optimization, uncertainty quantification (UQ), etc."
+  - category: "reinforcement-learning"
+    title: "Reinforcement Learning"
+    subtitle: "Projects that focus on reinforcement learning for atomistic ML."
+  - category: "rep-eng"
+    title: "Representation Engineering"
+    subtitle: "Projects that offer implementations of representations aka descriptors, fingerprints of atomistic systems, and models built with them, aka feature engineering."
+  - category: "rep-learn"
+    title: "Representation Learning"
+    subtitle: "General models that learn a representations aka embeddings of atomistic systems, such as message-passing neural networks (MPNN)."
+  - category: "uip"
+    title: "Universal Potentials"
+    subtitle: "Machine-learned interatomic potentials (ML-IAP) that have been trained on large, chemically and structural diverse datasets. For materials, this means e.g. datasets that include a majority of the periodic table."
+  - category: "unsupervised"
+    title: "Unsupervised Learning"
+    subtitle: "Projects that focus on unsupervised, semi- or self-supervised learning for atomistic ML, such as dimensionality reduction, clustering, contrastive learning, etc."
+  - category: "visualization"
+    title: "Visualization"
+    subtitle: "Projects that focus on visualization (viz.) for atomistic ML."
+  - category: "ml-wft"
+    title: "Wavefunction methods (ML-WFT)"
+    subtitle: "Projects and models that focus on quantities of wavefunction theory methods, such as Monte Carlo techniques like deep learning variational Monte Carlo (DL-VMC), quantum chemistry methods, etc."
+
+# ################################################################################
+# ################################################################################
+labels:
+  # Label sections: Category duplicate, Programming - specific, Project - specific, ML & Computing - specific, Atomistic Simulation - specific.
+  # ########################################
+  # Category-mirrored labels
+  # ########################################
+  - label: "active-learning"
+    # category: "active-learning"
+    name: "active-learning"
+    url: "https://en.wikipedia.org/wiki/Active_learning_(machine_learning)"
+  - label: "biomolecules"
+    # category: "biomolecules"
+    name: "biomolecules"
+    # name: "🧬"
+    # name: "&#x1F9EC;"
+    url: "https://en.wikipedia.org/wiki/Biomolecule"
+    description: "Projects that focus on biomolecules, protein structure, protein folding, etc. using atomistic ML."
+  - label: "community"
+    # category: "community"
+    name: "community-resource"
+  - label: "datasets"
+    # category: "datasets"
+    name: "datasets"
+  - label: "data-structures"
+    # category: "data-structures"
+    name: "data-structures"
+  - label: "ml-dft"
+    # category: "ml-dft"
+    name: "ML-DFT"
+  - label: "educational"
+    # category: "educational"
+    name: "educational"
+  - label: "xai"
+    # category: "xai"
+    name: "XAI"
+    url: "https://en.wikipedia.org/wiki/Explainable_artificial_intelligence"
+  - label: "ml-esm"
+    # category: "ml-esm"
+    name: "ML-ESM"
+  - label: "general-tool"
+    # category: "general-tool"
+    name: "general-tool"
+  - label: "generative"
+    # category: "generative"
+    name: "generative"
+  - label: "language-models"
+    # category: "language-models"
+    name: "language-models"
+    url: "https://en.wikipedia.org/wiki/Language_model"
+  - label: "ml-iap"
+    # category: "ml-iap"
+    name: "ML-IAP"
+  - label: "materials-discovery"
+    # category: "materials-discovery"
+    name: "materials-discovery"
+    url: "https://www.psik2022.net/program/symposia#h.p_hM6hJbQD9dex"
+  - label: "math"
+    # category: "math"
+    name: "math"
+  - label: "md"
+    # category: "md"
+    name: "MD"
+    url: "https://en.wikipedia.org/wiki/Molecular_dynamics"
+  - label: "probabilistic"
+    # category: "probabilistic"
+    name: "probabilistic"
+    description: "Probabilistic methods: Bayesian, Gaussian processes, adversarial attacks, uncertainty quantification (UQ)"
+    # # note: UQ has both probabilistic and non-probabilistic approaches. maybe split off into separate label.
+  - label: "reinforcement-learning"
+    # category: "reinforcement-learning"
+    name: "RL"
+    url: "https://en.wikipedia.org/wiki/Reinforcement_learning"
+  - label: "rep-eng"
+    # category: "rep-eng"
+    name: "rep-eng"
+    url: "https://en.wikipedia.org/wiki/Feature_engineering"
+    # url: "https://www.nature.com/articles/s41524-022-00721-x/tables/4"
+  - label: "rep-learn"
+    # category: "rep-learn"
+    name: "rep-learn"
+    url: "https://en.wikipedia.org/wiki/Feature_learning"
+  - label: "uip"
+    # category: "uip"
+    name: "UIP"
+    url: "https://www.google.com/search?q=universal+interatomic+potential"
+  - label: "unsupervised"
+    # category: "unsupervised"
+    name: "USL"
+    url: "https://en.wikipedia.org/wiki/Unsupervised_learning"
+  - label: "visualization"
+    # category: "visualization"
+    name: "viz"
+    url: "https://en.wikipedia.org/wiki/Visualization"
+  - label: "ml-wft"
+    # category: "ml-wft"
+    name: "ML-WFT"
+  # ########################################
+  # Programming - specific labels
+  # ########################################
+  - label: "lang-c"
+    name: "C-lang"
+    # image: "https://github.com/JuDFTteam/best-of-atomistic-machine-learning/blob/e143de7faaa0dff3bc6a2c9fbaa46d209e56cb5e/config/images/c.ico"
+    description: "Project has a C interface"
+  - label: "lang-cpp"
+    name: "C++"
+    # image: "https://github.com/JuDFTteam/best-of-atomistic-machine-learning/blob/e143de7faaa0dff3bc6a2c9fbaa46d209e56cb5e/config/images/c%2B%2B.ico"
+    description: "Project has a C++ interface"
+  - label: "lang-fortran"
+    name: "Fortran"
+    # image: "https://github.com/JuDFTteam/best-of-atomistic-machine-learning/blob/e143de7faaa0dff3bc6a2c9fbaa46d209e56cb5e/config/images/fortran.ico"
+    description: "Project has a Fortran interface"
+  - label: "lang-java"
+    name: "Java"
+    # image: "https://github.com/JuDFTteam/best-of-atomistic-machine-learning/blob/073d9ecaf3e28d0f1378e9f660cd4f631bf71fd7/config/images/java.ico"
+    description: "Project has a Java interface"
+  - label: "lang-js"
+    name: "JavaScript"
+    # image: "https://github.com/JuDFTteam/best-of-atomistic-machine-learning/blob/073d9ecaf3e28d0f1378e9f660cd4f631bf71fd7/config/images/javascript.ico"
+    description: "Project has a JavaScript interface"
+  - label: "lang-julia"
+    name: "Julia"
+    # image: "https://github.com/JuDFTteam/best-of-atomistic-machine-learning/blob/e143de7faaa0dff3bc6a2c9fbaa46d209e56cb5e/config/images/julia.ico"
+    description: "Project has a Julia interface"
+  - label: "lang-py"
+    name: "Python"
+    # image: "https://github.com/JuDFTteam/best-of-atomistic-machine-learning/blob/e143de7faaa0dff3bc6a2c9fbaa46d209e56cb5e/config/images/python.ico"
+    description: "Project has a Python interface"
+  - label: "lang-rust"
+    name: "Rust"
+    # image: "https://github.com/JuDFTteam/best-of-atomistic-machine-learning/blob/e143de7faaa0dff3bc6a2c9fbaa46d209e56cb5e/config/images/rust.ico"
+    description: "Project has a Rust interface"
+  # ########################################
+  # Project - specific labels
+  # ########################################
+  - label: "for-fun"
+    name: "for-fun"
+    description: "For-fun, thought-provoking projects. Not necessarily intended for scientific publication."
+  - label: "proprietary"
+    name: "proprietary"
+    description: "Proprietaryfor software."
+    url: "https://en.wikipedia.org/wiki/Proprietary_software"
+  - label: "single-paper"
+    name: "single-paper"
+    description: "Single-paper projects"
+  # ########################################
+  # ML & Computing - specific labels
+  # ########################################
+  - label: "ai-agent"
+    name: "ai-agent"
+    subtitle: "AI agents"
+    url: "https://en.wikipedia.org/wiki/Large_language_model#Agency"
+    # url: "https://en.wikipedia.org/wiki/Intelligent_agent"
+  - label: "automl"
+    name: "autoML"
+    subtitle: "Automated machine learning (AutoML)"
+    url: "https://en.wikipedia.org/wiki/Automated_machine_learning"
+  - label: "benchmarking"
+    name: "benchmarking"
+    description: "Benchmarking ML models"
+  - label: "computer-vision"
+    name: "computer-vision"
+    description: "Computer vision"
+    url: "https://en.wikipedia.org/wiki/Computer_vision"
+  - label: "experimental-data"
+    name: "experimental-data"
+    description: "Experimental data"
+    url: "https://en.wikipedia.org/wiki/Experimental_physics"
+  - label: "FAIR"
+    name: "FAIR"
+    subtitle: "FAIR Principles"
+    url: "https://www.go-fair.org/fair-principles/"
+  - label: "general-ml"
+    name: "general-ml"
+    description: "General machine learning"
+  - label: "graph-data"
+    name: "graph-data"
+    description: "Graph data"
+  - label: "generative"
+    name: "generative"
+    subtitle: "Generative models"
+    url: "https://en.wikipedia.org/wiki/Generative_model"
+  - label: "htc"
+    name: "HTC"
+    description: "High-throughput computing"
+    url: "https://en.wikipedia.org/wiki/High-throughput_computing"
+  - label: "knowledge-base"
+    name: "knowledge-base"
+    subtitle: "Knowledge base (KB)"
+    url: "https://en.wikipedia.org/wiki/Knowledge_base"
+  - label: "literature-data"
+    name: "literature-data"
+    subtitle: "Literature data"
+  - label: "model-repository"
+    name: "model-repository"
+    subtitle: "Model repository"
+  - label: "multifidelity"
+    name: "multifidelity"
+    subtitle: "Multifidelity machine learning"
+    url: "https://en.wikipedia.org/wiki/Multifidelity_simulation"
+  - label: "multimodal"
+    name: "multimodal"
+    subtitle: "Multimodal learning"
+    url: "https://en.wikipedia.org/wiki/Multimodal_learning"
+  - label: "multitak"
+    name: "multitask"
+    subtitle: "Multitask learning"
+    url: "https://en.wikipedia.org/wiki/Multi-task_learning"
+  - label: "neural-operator"
+    name: "neural-operator"
+    subtitle: "Neural operators"
+    url: "https://en.wikipedia.org/wiki/Neural_operators"
+  - label: "pinn"
+    name: "pinn"
+    subtitle: "Physics-informed neural networks"
+    url: "https://en.wikipedia.org/wiki/Physics-informed_neural_networks"
+  - label: "pretrained"
+    name: "pretrained"
+    subtitle: "Pretrained models"
+  - label: "RAG"
+    name: "RAG"
+    subtitle: "Retrieval-augmented generation"
+    url: "https://en.wikipedia.org/wiki/Retrieval-augmented_generation"
+  - label: "qml"
+    name: "QML"
+    # name: "⚛️"
+    # image: &#x269B;&#xFE0F;
+    # image: "https://github.com/JuDFTteam/best-of-atomistic-machine-learning/blob/41f7ffd05113cbaacae1ea22b02844c54cd7fca3/config/images/qml.ico"
+    description: "Quantum machine learning (QML)"
+    url: "https://en.wikipedia.org/wiki/Quantum_machine_learning"
+  - label: "recommender"
+    name: "recommender"
+    description: "Recommender systems"
+    url: "https://en.wikipedia.org/wiki/Recommender_system"
+  - label: "scikit-learn"
+    name: "scikit-learn"
+    description: "Heavily integrates with or extends scikit-learn"
+  - label: "small-data"
+    name: "small-data"
+    description: "Project optimizes for small data, limited data availability"
+  - label: "transfer-learning"
+    name: "transfer-learning"
+    description: "Project implements a transfer learning technique"
+    url: "https://en.wikipedia.org/wiki/Transfer_learning"
+  - label: "transformer"
+    name: "transformer"
+    description: "Project uses transformer deep learning architecture"
+    url: "https://en.wikipedia.org/wiki/Transformer_(machine_learning_model)"
+  - label: "workflows"
+    name: "workflows"
+    description: "Workflows, pipelines, MLOps"
+  # ########################################
+  # Atomistic Simulation - specific labels
+  # ########################################
+  - label: "catalysis"
+    name: "catalysis"
+    description: "Catalysis"
+    url: "https://en.wikipedia.org/wiki/Catalysis"
+  - label: "cheminformatics"
+    name: "cheminformatics"
+    description: "Cheminformatics"
+    url: "https://en.wikipedia.org/wiki/Cheminformatics"
+  - label: "density-of-states"
+    name: "density-of-states"
+    description: "Density of states"
+    url: "https://en.wikipedia.org/wiki/Density_of_states"
+  - label: "drug-discovery"
+    name: "drug-discovery"
+    # name: "💊"
+    # name: "&#x1F48A;"
+    description: "Drug discovery"
+    url: "https://en.wikipedia.org/wiki/Drug_design#Computer-aided_drug_design"
+  - label: "disordered-materials"
+    name: "Disordered Materials"
+    description: "Projects focusing on amorphous materials, random solid solutions, doping, dilute/disordered systems, or non-crystalline structural disorder."
+    url: "https://www.google.com/search?q=disordered-materials"
+  - label: "electrostatics"
+    name: "electrostatics"
+    # name: "⚡"
+    # image: "&#x26A1;"
+    description: "Electrostatics, partial charges, charge transfer, charge equilibration"
+    url: "https://en.wikipedia.org/wiki/Electrostatics"
+  - label: "excited-states"
+    name: "excited-states"
+    description: "Excited states"
+    url: "https://en.wikipedia.org/wiki/Excited_state"
+  - label: "long-range"
+    name: "long-range"
+    description: "Long-range interactions"
+    # url: "https://en.wikipedia.org/wiki/Excited_state"
+  - label: "magnetism"
+    name: "magnetism"
+    # name: "🧲"
+    # name: "&#x1F9F2;"
+    description: "Magnetism"
+  - label: "material-defect"
+    name: "material-defect"
+    description: "Material defects"
+    url: "https://en.wikipedia.org/wiki/Crystallographic_defect"
+  - label: "ml-functional"
+    name: "ml-functional"
+    description: "Machine learned DFT energy functionals, including XC and orbital-free functionals"
+    url: "https://en.wikipedia.org/wiki/Category:Density_functional_theory"
+  - label: "optical-properties"
+    name: "optical-properties"
+    # name: "👁️"
+    # name: "🌈"
+    # name: "&#x1F308;"
+    description: "Optical properties"
+    url: "https://en.wikipedia.org/wiki/Optical_properties"
+  - label: "phase-transition"
+    name: "phase-transition"
+    description: "Phase transitions"
+    url: "https://en.wikipedia.org/wiki/Phase_transition"
+  - label: "sampling"
+    name: "sampling"
+    description: "Projects that simplify the application of machine-learning related atomistic sampling methods."
+    # reference: issue #175 https://github.com/JuDFTteam/best-of-atomistic-machine-learning/issues/175
+  - label: "soft-matter"
+    name: "soft-matter"
+    description: "Soft matter"
+    url: "https://en.wikipedia.org/wiki/Soft_matter"
+  - label: "spectroscopy"
+    name: "spectroscopy"
+    description: "Spectroscopy"
+    url: "https://en.wikipedia.org/wiki/Spectroscopy"
+  - label: "structure-optimization"
+    name: "structure-optimization"
+    description: "Materials structure optimization"
+    url: "https://www.psik2022.net/program/symposia#h.p_hM6hJbQD9dex"
+  - label: "structure-prediction"
+    name: "structure-prediction"
+    description: "Materials structure prediction"
+  - label: "superconductors"
+    name: "superconductors"
+    # name: "🧘"
+    # name: "&#x1F9D8;&#x1F3FE;"
+    description: "Superconductors"
+    url: "https://en.wikipedia.org/wiki/Superconductivity"
+  - label: "surface-science"
+    name: "surface-science"
+    # name: "🪞"
+    # name: "&#x1FA9E;"
+    description: "Surface science"
+    url: "https://en.wikipedia.org/wiki/Surface_science"
+  - label: "transport-phenomena"
+    name: "transport-phenomena"
+    # name: "🔥"
+    # name: "&#x1F525;"
+    description: "Transport phenomena"
+    url: "https://en.wikipedia.org/wiki/Transport_phenomena"
+  - label: "xrd"
+    name: "XRD"
+    # name: "🩻"
+    # name: "&#x1FA7B;"
+    description: "X-ray diffraction"
+    url: "https://en.wikipedia.org/wiki/X-ray_crystallography"
+
+# ################################################################################
+# ################################################################################
+projects:
+  # ################################################################################
+  # COMMUNITY with resource: true (list here alphabetically)
+  # ################################################################################
+- name: AI for Science Map
+  resource: true
+  category: community
+  license: GPL-3.0 license
+  homepage: https://www.air4.science/map
+  description: Interactive mindmap of the AI4Science research field, including atomistic machine learning, including papers, packages, learning resources.
+- name: ASE ecosystem
+  resource: true
+  category: community
+  homepage: https://wiki.fysik.dtu.dk/ase/ecosystem.html
+  labels: ["md, ml-iap"]
+  description: This is a list of software packages related to ASE or using ASE.
+- name: Atomic Cluster Expansion
+  resource: true
+  category: community
+  homepage: https://cortner.github.io/ACEweb/
+  # group: ACE
+  description: Atomic Cluster Expansion (ACE) community homepage.
+  # #############################
+  # --->>> CONTENT CROPPED <<<---
+  # #############################
+  # ################################################################################
+  # COMMUNITY with resource: false (sorted by CI/CD)
+  # ################################################################################
+- name: The Collection of Database and Dataset Resources in Materials Science
+  category: community
+  labels: ["datasets"]
+  # license: # none found
+  github_id: sedaoturak/data-resources-for-materials-science
+- name: Graph-based Deep Learning Literature
+  category: community
+  labels: ["general-ml", "rep-learn"]
+  license: MIT
+  github_id: naganandy/graph-based-deep-learning-literature
+- name: Best-of Machine Learning with Python
+  category: community
+  labels: ["general-ml", "lang-py"]
+  license: "CC-BY-4.0"
+  github_id: ml-tooling/best-of-ml-python
+- name: Awesome Materials Informatics
+  category: community
+  license: https://github.com/tilde-lab/awesome-materials-informatics#license
+  github_id: tilde-lab/awesome-materials-informatics
+- name: GitHub topic materials-informatics
+  description: GitHub topic materials-informatics
+  category: community
+  homepage: https://github.com/topics/materials-informatics
+- name: A Highly Opinionated List of Open-Source Materials Informatics Resources
+  category: community
+  license: MIT
+  github_id: ncfrey/resources
+- name: MatBench
+  category: community
+  labels: ["datasets", "benchmarking", "model-repository"]
+  license: MIT
+  github_id: materialsproject/matbench
+  pypi_id: matbench
+  # #############################
+  # --->>> CONTENT CROPPED <<<---
+  # #############################
+  # ################################################################################
+  # DATASETS with resource: true (list here alphabetically)
+  # ################################################################################
+- name: Alexandria Materials Database
+  resource: true
+  description: A database of millions of theoretical crystal structures (3D, 2D and 1D) discovered by machine learning accelerated density functional theory high-throughput searches.
+  homepage: https://alexandria.icams.rub.de/
+  category: datasets
+  license: CC-BY-4.0
+  # package managers: none
+- name: "Catalysis Hub"
+  resource: true
+  category: datasets
+  description: "A web-platform for sharing data and software for computational catalysis research!"
+  homepage: https://www.catalysis-hub.org/
+- name: Citrination Datasets
+  resource: true
+  category: datasets
+  license: MIT
+  homepage: https://citrination.com/
+  description: AI-Powered Materials Data Platform. Open Citrination has been decommissioned.
+- name: crystals.ai
+  resource: true
+  category: datasets
+  description: Curated datasets for reproducible AI in materials science.
+  homepage: https://crystals.ai/
+- name: "DeepChem Models"
+  resource: true
+  category: datasets
+  labels: ["model-repository", "pretrained", "language-models"]
+  homepage: https://huggingface.co/DeepChem
+  description: DeepChem models on HuggingFace.
+- name: Graphs of Materials Project 20190401
+  resource: true
+  description: The dataset used to train the MEGNet interatomic potential.
+  homepage: https://figshare.com/articles/dataset/Graphs_of_Materials_Project_20190401/8097992
+  category: datasets
+  labels: ["ml-iap"]
+  license: MIT
+  # package managers: none
+  # #############################
+  # --->>> CONTENT CROPPED <<<---
+  # #############################
+  # ################################################################################
+  # DATASETS with resource: false (sorted by CI/CD)
+  # ################################################################################
+- name: Open Databases Integration for Materials Design (OPTIMADE)
+  category: datasets
+  license: CC-BY-4.0
+  github_id: Materials-Consortia/OPTIMADE
+  # homepage: https://optimade.org
+  # description: Specification of a common REST API for access to 25+ materials databases
+- name: Visual Graph Datasets
+  # resource: false
+  category: datasets
+  labels: ["xai", "rep-learn"]
+  license: "MIT"
+  github_id: aimat-lab/visual_graph_datasets
+  # #############################
+  # --->>> CONTENT CROPPED <<<---
+  # #############################
+- name: FAIR Chemistry datasets
+  github_id: FAIR-Chem/fairchem
+  description: Datasets OC20, OC22, etc. Formerly known as Open Catalyst Project.
+  category: datasets
+  labels: ["catalysis"]
+  license: MIT
+  pypi_id: fairchem-core
+- name: Meta Open Materials 2024 (OMat24) Dataset
+  github_id: FAIR-Chem/fairchem
+  homepage: https://huggingface.co/datasets/fairchem/OMAT24
+  description: Contains over 100 million Density Functional Theory calculations focused on structural and compositional diversity.
+  category: datasets
+  # labels: ["ml-iap", "uip", "catalysis"]
+  license: CC-BY-4.0
+  pypi_id: fairchem-core
+  # #############################
+  # --->>> CONTENT CROPPED <<<---
+  # #############################
+- name: The Perovskite Database Project
+  # homepage: https://www.perovskitedatabase.com
+  description: Perovskite Database Project aims at making all perovskite device data, both past and future, available in a form adherent to the FAIR data principles
+  github_id: Jesperkemist/perovskitedatabase
+  category: datasets
+  labels: ["community"]
+  # license: # none found
+  # package managers: none
+- name: load-atoms
+  github_id: jla-gardner/load-atoms
+  category: datasets
+  labels: ["data-structures"]
+  license: MIT
+  pypi_id: load-atoms
+  # ################################################################################
+  # EDUCATIONAL with resource: true (list here alphabetically)
+  # ################################################################################
+- name: AI for Science 101
+  homepage: https://ai4science101.github.io/
+  resource: true
+  category: educational
+  labels: ["community", "rep-learn"]
+  # license: # none found
+  # package managers: none
+  # #############################
+  # --->>> CONTENT CROPPED <<<---
+  # #############################
+  # ################################################################################
+  # EDUCATIONAL with resource: false (sorted by CI/CD)
+  # ################################################################################
+- name: COSMO Software Cookbook
+  category: educational
+  # docs_url: https://software-cookbook.rtfd.io/
+  github_id: lab-cosmo/software-cookbook
+- name: iam-notebooks
+  category: educational
+  github_id: ceriottm/iam-notebooks
+- name: ML-in-chemistry-101
+  category: educational
+  github_id: BingqingCheng/ML-in-chemistry-101
+  # #############################
+  # --->>> CONTENT CROPPED <<<---
+  # #############################
+- name: AI4ChemMat Hands-On Series
+  github_id: ai4chemmat/ai4chemmat.github.io
+  # homepage: https://ai4chemmat.github.io/
+  category: educational
+  license: MPL-2.0
+  description: Hands-On Series organized by Chemistry and Materials working group at Argonne Nat Lab.
+  # package managers: none
+- name: DSM-CORE
+  github_id: MatSciEdu/DSM-CORE
+  homepage: https://matsciedu.github.io/DSM-CORE
+  category: educational
+  # license: none found
+  # package managers: none
+- name: MLforMaterials
+  github_id: aronwalsh/MLforMaterials
+  category: educational
+  labels: ["community", "general-ml", "rep-eng", "materials-discovery"]
+  license: MIT
+  # package managers: none
+  # ################################################################################
+  # ALL THE REST (sorted by CI/CD)
+  # ################################################################################
+- name: PACE
+  category: md
+  description: "The LAMMPS ML-IAP `pair_style pace`, aka Atomic Cluster Expansion (ACE), aka ML-PACE, https://cortner.github.io/ACEweb/software/."
+  # homepage: https://cortner.github.io/ACEweb/software/
+  # docs_url: https://docs.lammps.org/pair_pace.html
+  # group_id: ACE
+  license: https://github.com/ICAMS/lammps-user-pace/blob/main/LICENSE
+  github_id: ICAMS/lammps-user-pace
+- name: Pacemaker
+  category: ml-iap
+  description: Python package for fitting atomic cluster expansion (ACE) potentials
+  homepage: https://cortner.github.io/ACEweb/software/
+  # docs_url: https://pacemaker.readthedocs.io
+  # group_id: ACE
+  license: https://github.com/ICAMS/python-ace/blob/master/LICENSE.md
+  github_id: ICAMS/python-ace
+  pypi_id: python-ace
+- name: TensorPotential
+  category: ml-iap
+  description: "Tensorpotential is a TensorFlow based tool for development, fitting ML interatomic potentials from electronic structure calculations data and perform computations using these potentials [...] Only Atomic Cluster Expansion (ACE) is available at the moment."
+  homepage: https://cortner.github.io/ACEweb/software/
+  # group_id: ACE
+  license: https://github.com/ICAMS/TensorPotential/blob/main/LICENSE.md
+  github_id: ICAMS/TensorPotential
+- name: ACE1.jl
+  category: ml-iap
+  labels: ["lang-julia"]
+  homepage: https://acesuit.github.io/
+  # docs_url: https://acesuit.github.io/ACE1pack.jl
+  license: https://github.com/ACEsuit/ACE1.jl/blob/main/ASL.md
+  # group_id: ACE
+  github_id: ACEsuit/ACE1.jl
+  # #############################
+  # --->>> CONTENT CROPPED <<<---
+  # #############################
+- name: Scikit-Matter
+  category: general-tool
+  labels: ["scikit-learn"]
+  # docs_url: https://scikit-matter.readthedocs.io
+  github_id: scikit-learn-contrib/scikit-matter
+  pypi_id: skmatter
+  conda_id: conda-forge/skmatter
+- name: Equisolve
+  category: general-tool
+  labels: ["ml-iap"]
+  # docs_url: https://lab-cosmo.github.io/equisolve
+  github_id: lab-cosmo/equisolve
+- name: Metatensor
+  category: data-structures
+  labels: ["ml-iap", "md", "lang-rust", "lang-c", "lang-cpp", "lang-py"]
+  # docs_url: https://docs.metatensor.org
+  github_id: metatensor/metatensor
+  license:  BSD-3-Clause
+  pypi_id: metatensor
+- name: Sketchmap
+  labels: ["lang-cpp"]
+  category: unsupervised
+  github_id: lab-cosmo/sketchmap
+- name: Wigner Kernels
+  category: math
+  description: Collection of programs to benchmark Wigner kernels.
+  labels: ["benchmarking"]
+  github_id: lab-cosmo/wigner_kernels
+- name: Featomic
+  category: rep-eng
+  labels: ["lang-rust", "lang-cpp"]
+  # docs_url: https://metatensor.github.io/featomic
+  github_id: metatensor/featomic
+  license:  BSD-3-Clause
+  # package managers: none
+  # #############################
+  # --->>> CONTENT CROPPED <<<---
+  # #############################
+- name: MEGNet
+  category: ml-iap
+  labels: ["multifidelity"]
+  # homepage: https://crystals.ai/
+  github_id: materialsvirtuallab/megnet
+  pypi_id: megnet
+- name: MatGL (Materials Graph Library)
+  category: rep-learn
+  labels: ["ml-iap", "pretrained", "multifidelity"]
+  # homepage: https://matgl.ai
+  github_id: materialsvirtuallab/matgl
+  pypi_id: matgl
+  dockerhub_id: materialsvirtuallab/matgl
+- name: MAML
+  category: general-tool
+  # homepage: https://materialsvirtuallab.github.io/maml/
+  github_id: materialsvirtuallab/maml
+  pypi_id: maml
+  # #############################
+  # --->>> CONTENT CROPPED <<<---
+  # #############################
+- name:  benchmarking-gnns
+  category: rep-learn
+  labels: ["single-paper", "benchmarking"]
+  github_id: graphdeeplearning/benchmarking-gnns
+- name: DeepErwin
+  category: ml-wft
+  # docs_url: https://mdsunivie.github.io/deeperwin/
+  license: https://github.com/mdsunivie/deeperwin/blob/master/LICENSE
+  github_id: mdsunivie/deeperwin
+  pypi_id: deeperwin
+- name: Allegro
+  category: ml-iap
+  github_id: mir-group/allegro
+- name: NequIP
+  category: ml-iap
+  github_id: mir-group/nequip
+  pypi_id: nequip
+  conda_id: conda-forge/nequip
+  # #############################
+  # --->>> CONTENT CROPPED <<<---
+  # #############################
+- name: SevenNet
+  github_id: MDIL-SNU/SevenNet
+  category: uip
+  labels: ["ml-iap", "md", "pretrained"]
+  license: GPL-3.0
+  pypi_id: sevenn
+- name: MatterSim
+  github_id: microsoft/mattersim
+  category: uip
+  labels: ["ml-iap", "active-learning", "multimodal", "phase-transition", "pretrained"]
+  license: MIT
+  pypi_id: mattersim
+- name: MatterGen
+  github_id: microsoft/mattergen
+  category: materials-discovery
+  labels: ["generative", "structure-prediction", "pretrained"]
+  license: MIT
+  # package managers: none
+  # #############################
+  # --->>> CONTENT CROPPED <<<---
+  # #############################
+- name: CrystalFormer
+  github_id: deepmodeling/CrystalFormer
+  category: materials-discovery
+  labels: ["generative", "structure-prediction", "rep-learn", "probabilistic", "reinforcement-learning", "transformer"]
+  license: Apache-2.0
+  # package managers: none
+- name: DeePTB
+  github_id: deepmodeling/DeePTB
+  category: ml-esm
+  labels: ["ml-dft"]
+  license: LGPL-3.0
+  pypi_id: dptb
+- name: DeepMD-GNN
+  github_id: deepmodeling/deepmd-gnn
+  category: ml-iap
+  labels: ["rep-learn", "md", "uip", "lang-cpp"]
+  license: LGPL-3.0
+  # package managers: none
+- name: DP-GEN2
+  github_id: deepmodeling/dpgen2
+  category: active-learning
+  labels: ["ml-iap", "md", "workflows"]
+  license: LGPL-3.0
+  # package managers: none
+  # #############################
+  # --->>> CONTENT CROPPED <<<---
+  # #############################

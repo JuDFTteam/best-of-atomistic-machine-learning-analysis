@@ -1,0 +1,91 @@
+name,homepage,projectrank,category,labels
+PyG Models,https://github.com/pyg-team/pytorch_geometric/tree/master/torch_geometric/nn/models,0,representation-learning,
+Deep Graph Library (DGL),https://www.dgl.ai/,0,representation-learning,
+DeepChem,https://deepchem.io/,0,general-tools,
+RDKit,https://www.rdkit.org/,0,general-tools,['C++']
+DeePMD-kit,https://github.com/deepmodeling/deepmd-kit,5,mlp,['C++']
+Matminer,https://hackingmaterials.github.io/matminer/,0,general-tools,
+SchNetPack,https://github.com/atomistic-machine-learning/schnetpack,0,representation-learning,
+DScribe,https://github.com/SINGROUP/dscribe,8,representations,
+QUIP,https://libatoms.github.io/,0,general-tools,
+MEGNet,https://github.com/materialsvirtuallab/megnet,0,mlp,
+dpdata,https://github.com/deepmodeling/dpdata,0,data-structures,
+NVIDIA Deep Learning Examples for Tensor Cores,https://github.com/NVIDIA/DeepLearningExamples,4,educational,['drug-discovery']
+TorchANI,https://github.com/aiqm/torchani,4,mlp,
+JARVIS-Tools,https://github.com/usnistgov/jarvis,3,general-tools,
+FLARE,https://github.com/mir-group/flare,0,general-tools,
+XenonPy,https://github.com/yoshida-lab/XenonPy,3,general-tools,
+MAST-ML,https://github.com/uw-cmg/MAST-ML,5,general-tools,
+QML,http://www.qmlcode.org/,0,general-tools,
+sGDML,https://github.com/stefanch/sGDML,0,mlp,
+CatLearn,https://github.com/SUNCAT-Center/CatLearn,3,representation-engineering,['surface-science']
+Librascal,https://github.com/lab-cosmo/librascal,2,representations,
+KLIFF,https://github.com/openkim/kliff,2,mlp,"['probabilistic', 'workflows']"
+n2p2,https://github.com/CompPhysVienna/n2p2,0,mlp,['C++']
+SISSO,https://github.com/rouyang2017/SISSO,2,representations,['Fortran']
+Automatminer,https://hackingmaterials.lbl.gov/automatminer/,0,general-tools,
+PyXtalFF,https://github.com/MaterSim/PyXtal_FF,0,mlp,
+Crystal Graph Convolutional Neural Networks (CGCNN),https://github.com/txie-93/cgcnn,2,representation-learning,
+OpenChem,https://github.com/Mariewelt/OpenChem,0,general-tools,
+ReLeaSE,https://github.com/isayev/ReLeaSE,2,reinforcement-learning,['drug-discovery']
+DeepLearningLifeSciences,https://github.com/deepchem/DeepLearningLifeSciences,0,educational,
+ANI-1,https://github.com/isayev/ASE_ANI,3,mlp,
+Neural fingerprint (nfp),https://github.com/NREL/nfp,0,representation-learning,
+AMPtorch,https://github.com/ulissigroup/amptorch,0,general-tools,
+SIMPLE-NN,https://github.com/MDIL-SNU/SIMPLE-NN,2,mlp,
+cmlkit,https://marcel.science/repbench/,0,representation-engineering,['benchmarking']
+NeuralXC,https://github.com/semodi/neuralxc,0,ml-dft,
+OpenKIM,https://openkim.org/,4,mlp,['knowledgebase']
+molecularGNN_smiles,https://github.com/masashitsubaki/molecularGNN_smiles,0,representation-learning,
+SchNet,https://github.com/atomistic-machine-learning/SchNet,1,mlp,
+ANI-1 Dataset,https://github.com/isayev/ANI1_dataset,1,datasets,
+Sketchmap,https://github.com/lab-cosmo/sketchmap,3,unsupervised,
+SNAP,https://github.com/materialsvirtuallab/snap,1,mlp,
+RDKit Tutorials,https://github.com/rdkit/rdkit-tutorials,2,educational,
+DTNN,https://github.com/atomistic-machine-learning/dtnn,2,representation-learning,
+AIMNet,https://github.com/aiqm/aimnet,0,mlp,['single-paper']
+PhysNet,https://github.com/MMunibas/PhysNet,0,mlp,['electrostatics']
+COMP6 Benchmark dataset,https://github.com/isayev/COMP6,1,datasets,
+fplib,https://github.com/zhuligs/fplib,2,representations,"['C', 'single-paper']"
+SOAPxx,https://github.com/capoe/soapxx,2,representations,['C++']
+COSMO Toolbox,https://github.com/lab-cosmo/toolbox,2,math,
+COSMO tools,https://github.com/lab-cosmo/cosmo-tools,0,others,
+PANNA,https://gitlab.com/PANNAdevs/panna,0,mlp,['benchmarking']
+PiNN Lab,https://github.com/Teoroo-CMC/PiNN_lab,0,educational,
+Deep Graph Library (DGL),https://github.com/dmlc/dgl,7,representation-learning,
+DeepChem,https://github.com/deepchem/deepchem,15,general-tools,
+RDKit,https://github.com/rdkit/rdkit,16,general-tools,['C++']
+Matminer,https://github.com/hackingmaterials/matminer,11,general-tools,
+QUIP,https://github.com/libAtoms/QUIP,14,general-tools,
+DM21,https://github.com/deepmind/deepmind-research/tree/master/density_functional_approximation_dm21,0,ml-dft,
+QML,https://github.com/qmlcode/qml,5,general-tools,
+Automatminer,https://github.com/hackingmaterials/automatminer,2,general-tools,
+cmlkit,https://github.com/sirmarcel/cmlkit,0,representation-engineering,['benchmarking']
+cdk,https://github.com/cdk/cdk,17,rep-eng,"['cheminformatics', 'lang-java']"
+MPContribs,https://github.com/materialsproject/MPContribs,11,datasets,
+NVIDIA Deep Learning Examples for Tensor Cores,https://github.com/NVIDIA/DeepLearningExamples#graph-neural-networks,4,rep-learn,"['educational', 'drug-discovery']"
+Graph-based Deep Learning Literature,https://github.com/naganandy/graph-based-deep-learning-literature,3,community,"['general-ml', 'rep-learn']"
+Open Databases Integration for Materials Design (OPTIMADE),https://github.com/Materials-Consortia/OPTIMADE,3,datasets,
+mat2vec,https://github.com/materialsintelligence/mat2vec,0,lm,['rep-learn']
+TensorMol,https://github.com/jparkhill/TensorMol,3,ml-iap,['single-paper']
+Awesome Materials Informatics,https://github.com/tilde-lab/awesome-materials-informatics,1,community,
+PROPhet,https://github.com/biklooost/PROPhet,2,ml-dft,"['ml-iap', 'md', 'single-paper', 'lang-cpp']"
+tensorfieldnetworks,https://github.com/tensorfieldnetworks/tensorfieldnetworks,0,rep-learn,
+Element encoder,https://github.com/jeherr/element-encoder,0,rep-learn,['single-paper']
+JAX-DFT,https://github.com/google-research/google-research/tree/master/jax_dft,0,ml-dft,
+ChemDataExtractor,https://github.com/mcs07/ChemDataExtractor,5,language-models,['literature-data']
+dlpack,https://github.com/dmlc/dlpack,4,data-structures,['lang-cpp']
+tinker-hp,https://github.com/TinkerTools/tinker-hp,0,ml-iap,
+OPTIMADE Python tools,https://github.com/Materials-Consortia/optimade-python-tools,0,datasets,
+Materials Data Facility (MDF),https://www.materialsdatafacility.org,0,datasets,
+GPUMD,https://github.com/brucefan1983/GPUMD,3,ml-iap,"['md', 'lang-cpp', 'electrostatics']"
+DPA-2,https://github.com/deepmodeling/deepmd-kit,4,uip,"['ml-iap', 'pretrained', 'workflows', 'datasets']"
+Crystal Toolkit,https://github.com/materialsproject/crystaltoolkit,4,visualization,
+DM21,https://github.com/google-deepmind/deepmind-research/tree/master/density_functional_approximation_dm21,0,ml-dft,
+OpenML,https://github.com/openml/OpenML,9,community,['datasets']
+fplib,https://github.com/Rutgers-ZRG/libfp,4,rep-eng,"['lang-c', 'single-paper']"
+DeePMD-DPA3,https://github.com/deepmodeling/deepmd-kit,0,uip,"['ml-iap', 'pretrained', 'workflows', 'datasets']"
+SMACT,https://github.com/WMD-group/SMACT,0,materials-discovery,"['htc', 'structure-prediction', 'electrostatics']"
+ChemML,https://github.com/hachmannlab/chemml,0,rep-eng,"['cheminformatics', 'active-learning', 'workflows']"
+MPDS API,https://github.com/mpds-io/mpds-api,0,datasets,['phase-transition']
+ElemNet,https://github.com/NU-CUCIS/ElemNet,0,rep-eng,['single-paper']

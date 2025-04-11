@@ -1,0 +1,21 @@
+name,star_count,category,labels
+JAX-DFT,35308.0,ml-dft,
+PyG Models,22178.0,rep-learn,['general-ml']
+Best-of Machine Learning with Python,19911.0,community,"['general-ml', 'lang-py']"
+NVIDIA Deep Learning Examples for Tensor Cores,14140.0,rep-learn,"['educational', 'drug-discovery']"
+Deep Graph Library (DGL),13822.0,rep-learn,
+DM21,13685.0,ml-dft,
+paper-qa,7117.0,language-models,['ai-agent']
+DeepChem,5901.0,general-tool,
+Graph-based Deep Learning Literature,4903.0,community,"['general-ml', 'rep-learn']"
+RDKit,2861.0,general-tool,"['lang-cpp', 'cheminformatics']"
+benchmarking-gnns,2579.0,rep-learn,"['single-paper', 'benchmarking']"
+Graphormer,2246.0,rep-learn,"['transformer', 'pretrained']"
+DIG: Dive into Graphs,1947.0,rep-learn,
+DPA-2,1619.0,uip,"['ml-iap', 'pretrained', 'workflows', 'datasets']"
+DeePMD-DPA3,1619.0,uip,"['ml-iap', 'pretrained', 'workflows', 'datasets']"
+DeePMD-kit,1619.0,ml-iap,"['md', 'workflows', 'lang-cpp']"
+MatterGen,1290.0,materials-discovery,"['generative', 'structure-prediction', 'pretrained']"
+JAX-MD,1254.0,md,
+e3nn,1054.0,rep-learn,
+FAIRChem eSEN models,1035.0,uip,"['pretrained', 'uip', 'rep-learn', 'catalysis']"

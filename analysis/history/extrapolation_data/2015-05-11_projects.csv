@@ -1,0 +1,12 @@
+name,homepage,projectrank,category,labels
+RDKit,https://www.rdkit.org/,0,general-tools,['C++']
+QUIP,https://libatoms.github.io/,0,general-tools,
+OpenKIM,https://openkim.org/,0,mlp,['knowledgebase']
+Sketchmap,https://github.com/lab-cosmo/sketchmap,0,unsupervised,
+COSMO Toolbox,https://github.com/lab-cosmo/toolbox,0,math,
+RDKit,https://github.com/rdkit/rdkit,3,general-tools,['C++']
+QUIP,https://github.com/libAtoms/QUIP,2,general-tools,
+cdk,https://github.com/cdk/cdk,9,rep-eng,"['cheminformatics', 'lang-java']"
+MPContribs,https://github.com/materialsproject/MPContribs,0,datasets,
+OpenML,https://github.com/openml/OpenML,3,community,['datasets']
+SMACT,https://github.com/WMD-group/SMACT,0,materials-discovery,"['htc', 'structure-prediction', 'electrostatics']"
