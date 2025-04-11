@@ -1,3 +1,6 @@
+# project-specific
+tokens.txt
+
 # IntelliJ
 target/
 .idea/
@@ -94,4 +97,5 @@ hs_err_pid*
 *.swo
 temp/*
 .DS_Store
+
 
