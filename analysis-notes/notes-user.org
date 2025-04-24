@@ -1,3 +1,48 @@
+* Draft v1
+** Data sources
+The manuscript in which this data analysis was used is here.
+
+- https://iffgit.fz-juelich.de/phd-project-wasmer/projects/daemon-roadmap-2025/-/tree/main/manuscript
+- Version
+  - Commit 49ae9afc
+    - https://iffgit.fz-juelich.de/phd-project-wasmer/projects/daemon-roadmap-2025/-/commit/49ae9afcb6291175f26edc76669f1b13ed32b317
+
+The data analysis used in this draft is based on the "Best of Atomistic Machine Learning List" (baml).
+
+- Website https://github.com/JuDFTteam/best-of-atomistic-machine-learning
+- Version used
+  - Release "Update: 2025.04.09-13.10"
+    - Tag https://github.com/JuDFTteam/best-of-atomistic-machine-learning/releases/tag/2025.04.09-13.10
+    - DOI https://doi.org/10.5281/zenodo.15182793
+  - Commit 4cac8ad
+    - https://github.com/JuDFTteam/best-of-atomistic-machine-learning/commit/4cac8ad61728477fe438ff34296247e96a0c5563
+
+The analysis and associated output plots and tables are in this separate repo.
+
+- https://github.com/JuDFTteam/best-of-atomistic-machine-learning-analysis
+- Version used
+  - Commit 83d6f0f
+    - https://github.com/JuDFTteam/best-of-atomistic-machine-learning-analysis/commit/83d6f0f1767627dc789d6676283a78b8b6f4dba4
+
+How the analysis was carried out.
+
+- Data: All CSV files in the baml =/history= folder.
+  - https://github.com/JuDFTteam/best-of-atomistic-machine-learning/tree/main/history
+- Script: production-plots-v1.py
+  - https://github.com/JuDFTteam/best-of-atomistic-machine-learning-analysis/blob/main/scripts/timeseries_visualization/production-plots-v1.py
+
+How the analysis was developed.
+
+- Code assistance in local Windsurf editor, version 1.6.4
+- Partially saved development notes
+  - https://github.com/JuDFTteam/best-of-atomistic-machine-learning-analysis/tree/main/analysis-notes
+
+Local copies of repositories.
+
+- [[file:~/src/github.com/judftteam/best-of-atomistic-machine-learning/][judftteam/best-of-atomistic-machine-learning]]
+- [[file:~/src/github.com/judftteam/best-of-atomistic-machine-learning-local-2/][judftteam/best-of-atomistic-machine-learning-local-2]]
+- [[file:~/src/github.com/judftteam/best-of-atomistic-machine-learning-analysis/][judftteam/best-of-atomistic-machine-learning-analysis]]
+* Journal
 <2025-04-08 Tue> Setup.
 
 - Via IDE (Windsurf), created Python env =../.venv=.
