@@ -1,0 +1,29 @@
+name,dependent_project_count,category,labels,rank_by_dpc
+dpdata,179.0,data-structures,,9
+ATOM3D,46.0,datasets,"['biomolecules', 'benchmarking']",26
+DPA-2,37.0,uip,"['ml-iap', 'pretrained', 'workflows', 'datasets']",28
+DeePMD-DPA3,37.0,uip,"['ml-iap', 'pretrained', 'workflows', 'datasets']",29
+DeePMD-kit,37.0,ml-iap,"['md', 'workflows', 'lang-cpp']",30
+mp-pyrho,33.0,data-structures,['ml-dft'],31
+MatBench,25.0,community,"['datasets', 'benchmarking', 'model-repository']",37
+Metatensor,13.0,data-structures,"['ml-iap', 'md', 'lang-rust', 'lang-c', 'lang-cpp', 'lang-py']",49
+KFAC-JAX,12.0,math,,50
+IPSuite,12.0,active-learning,"['ml-iap', 'md', 'workflows', 'htc', 'FAIR']",53
+MatCalc,12.0,ml-iap,"['workflows', 'benchmarking', 'uip', 'pretrained', 'model-repository']",54
+DP-GEN,10.0,active-learning,"['ml-iap', 'md', 'workflows']",61
+ChemML,9.0,rep-eng,"['cheminformatics', 'active-learning', 'workflows']",62
+load-atoms,8.0,datasets,['data-structures'],68
+cmlkit,7.0,rep-eng,['benchmarking'],73
+DP-GEN2,6.0,active-learning,"['ml-iap', 'md', 'workflows']",77
+SpheriCart,6.0,math,,79
+gpax,5.0,math,"['probabilistic', 'active-learning']",84
+KLIFF,4.0,ml-iap,"['probabilistic', 'workflows']",90
+MatBench Discovery,4.0,community,"['datasets', 'benchmarking', 'model-repository']",93
+Metatrain,3.0,ml-iap,"['workflows', 'benchmarking', 'rep-eng', 'rep-learn']",96
+cuEquivariance,2.0,math,['rep-learn'],102
+ffonons,2.0,uip,"['benchmarking', 'density-of-states']",105
+ChemBench,2.0,language-models,"['benchmarking', 'multimodal']",106
+hippynn,2.0,rep-learn,['workflows'],116
+wfl,2.0,ml-iap,"['workflows', 'htc']",118
+Autoplex,2.0,ml-iap,"['benchmarking', 'workflows']",120
+MLIP Arena Leaderboard,2.0,uip,"['ml-iap', 'benchmarking']",121

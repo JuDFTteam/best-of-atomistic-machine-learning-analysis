@@ -521,6 +521,7 @@ class TimeSeriesVisualizer:
         dpi: int = 300,
         stack_order: Optional[List[str]] = None,
         legend_order: Optional[List[str]] = None,
+        fontsize: Optional[int] = 12,
     ) -> plt.Figure:
         """
         Generate a stacked area chart or stream graph from the processed data.
@@ -624,9 +625,9 @@ class TimeSeriesVisualizer:
         
         # Set up labels and title
         if title:
-            ax.set_title(title, fontsize=16)
+            ax.set_title(title, fontsize=fontsize)
         
-        ax.set_xlabel(xlabel, fontsize=12)
+        ax.set_xlabel(xlabel, fontsize=fontsize)
         
         if ylabel:
             y_label_text = ylabel
@@ -637,15 +638,23 @@ class TimeSeriesVisualizer:
             else:
                 y_label_text = f"{y_property}"
         
-        ax.set_ylabel(y_label_text, fontsize=12)
+        ax.set_ylabel(y_label_text, fontsize=fontsize)
         
         # Format x-axis as dates
         ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m'))
         ax.xaxis.set_major_locator(mdates.MonthLocator(interval=3))
-        plt.xticks(rotation=45)
+        plt.xticks(rotation=45, fontsize=fontsize)
+
+        # Sync yticks font size
+        plt.yticks(fontsize=fontsize)
+
+        # try again setting xlabel, ylabel
+        # first time didn't pick up font size
+        plt.xlabel(xlabel, fontsize=fontsize)
+        plt.ylabel(y_label_text, fontsize=fontsize)
         
         # Add legend
-        ax.legend(loc='upper left', bbox_to_anchor=(1, 1), fontsize=10)
+        ax.legend(loc='upper left', bbox_to_anchor=(1, 1), fontsize=fontsize)
         
         # Adjust layout
         plt.tight_layout()
@@ -679,6 +688,7 @@ def create_timeseries_visualization(
     interpolate_resource: bool = False,
     stack_order: Optional[List[str]] = None,
     legend_order: Optional[List[str]] = None,
+    fontsize: Optional[int] = 12,
 ) -> Tuple[pd.DataFrame, plt.Figure]:
     """
     Create a time series visualization of project metrics.
@@ -745,6 +755,7 @@ def create_timeseries_visualization(
         dpi=dpi,
         stack_order=stack_order,
         legend_order=legend_order,
+        fontsize=fontsize,
     )
     
     return df, fig
